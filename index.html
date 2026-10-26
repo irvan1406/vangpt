@@ -30,9 +30,6 @@
         </div>
                 <button id="prefBtn" title="Preferensi" class="bg-black text-[13px] border border-red-900/50 w-9 h-9 rounded text-red-500 outline-none cursor-pointer">⚙</button>
         <select id="modeSelector" class="bg-black text-[10px] border border-red-900/50 p-2 rounded text-red-500 font-bold outline-none cursor-pointer">
-            <option value="api">GEMINI CLOUD (ONLINE)</option>
-            <option value="ollama">OLLAMA LOCAL (OFFLINE)</option>
-            <option value="astra">AGENTROUTER · GPT ASTRA</option>
             <option value="wf">WFLABS · DEEPSEEK + GLM</option>
         </select>
     </header>
@@ -48,7 +45,7 @@
         <div id="ollamaSettings" class="hidden mb-3 flex gap-2">
             <input type="text" id="ollamaUrl" value="http://localhost:11434" class="flex-1 bg-black border border-gray-800 p-2 rounded text-[10px] text-red-500 outline-none">
         </div>
-        <div id="wfSettings" class="hidden mb-3 flex gap-2">
+        <div id="wfSettings" class="mb-3 flex gap-2">
             <select id="wfModel" class="flex-1 bg-black border border-gray-800 p-2 rounded text-[10px] text-red-500 outline-none cursor-pointer">
                 <option value="wf/deepseek-v4.1-flash">DeepSeek V4.1 Flash — chat + vision</option>
                 <option value="wf/deepseek-v4.1-flash-1017">DeepSeek V4.1 Flash 1017 — chat</option>
@@ -243,6 +240,8 @@
                 return data.response;
             } catch (e) { return "Koneksi Ollama Gagal! Pastikan Laptop nyala dan set OLLAMA_ORIGINS='*' 🦾"; }
         }
+
+        modeSelector.dispatchEvent(new Event('change'));
 
         sendBtn.addEventListener('click', async () => {
             const text = userInput.value.trim();
