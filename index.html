@@ -12,7 +12,11 @@
         .gradient-text { background: linear-gradient(90deg, #ff1111, #660000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .red-shadow { box-shadow: 0 0 20px rgba(255, 0, 0, 0.15); }
         .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
-    </style>
+        @media (min-width: 768px) {
+            #chatBox { padding-left: max(1rem, calc((100vw - 56rem) / 2)); padding-right: max(1rem, calc((100vw - 56rem) / 2)); }
+            header { padding-left: max(1rem, calc((100vw - 56rem) / 2)) !important; padding-right: max(1rem, calc((100vw - 56rem) / 2)) !important; }
+            body > div.glass.border-t { padding-left: max(1rem, calc((100vw - 56rem) / 2)); padding-right: max(1rem, calc((100vw - 56rem) / 2)); }
+        }    </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
 
@@ -24,10 +28,12 @@
                 <p class="text-[9px] text-gray-500 uppercase tracking-widest">Master: Tuan Irvan ⟡ <span id="currentKeyName" class="text-red-500">Auto-Rotating Keys</span></p>
             </div>
         </div>
+                <button id="prefBtn" title="Preferensi" class="bg-black text-[13px] border border-red-900/50 w-9 h-9 rounded text-red-500 outline-none cursor-pointer">⚙</button>
         <select id="modeSelector" class="bg-black text-[10px] border border-red-900/50 p-2 rounded text-red-500 font-bold outline-none cursor-pointer">
             <option value="api">GEMINI CLOUD (ONLINE)</option>
             <option value="ollama">OLLAMA LOCAL (OFFLINE)</option>
             <option value="astra">AGENTROUTER · GPT ASTRA</option>
+            <option value="wf">WFLABS · DEEPSEEK + GLM</option>
         </select>
     </header>
 
@@ -42,12 +48,36 @@
         <div id="ollamaSettings" class="hidden mb-3 flex gap-2">
             <input type="text" id="ollamaUrl" value="http://localhost:11434" class="flex-1 bg-black border border-gray-800 p-2 rounded text-[10px] text-red-500 outline-none">
         </div>
+        <div id="wfSettings" class="hidden mb-3 flex gap-2">
+            <select id="wfModel" class="flex-1 bg-black border border-gray-800 p-2 rounded text-[10px] text-red-500 outline-none cursor-pointer">
+                <option value="wf/deepseek-v4.1-flash">DeepSeek V4.1 Flash — chat + vision</option>
+                <option value="wf/deepseek-v4.1-flash-1017">DeepSeek V4.1 Flash 1017 — chat</option>
+                <option value="wf/glm-5.3-flash">GLM 5.3 Flash — chat (reasoning)</option>
+                <option value="wf/nvidia-nemotron-3.5-super-vl-120b-a12b-nvfp4">Nemotron VL 120B — vision</option>
+            </select>
+        </div>
         
         <div class="flex gap-3 bg-black/50 p-2 rounded-2xl border border-white/5 focus-within:border-red-600 transition-all">
             <textarea id="userInput" rows="1" placeholder="Masukkan perintah..." class="flex-1 bg-transparent p-2 text-sm outline-none resize-none" style="min-height: 44px;"></textarea>
             <button id="sendBtn" class="bg-red-800 hover:bg-red-600 text-white w-12 h-12 rounded-xl flex items-center justify-center transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
             </button>
+        </div>
+    </div>
+
+    <div id="prefModal" class="hidden fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+        <div class="glass rounded-2xl w-full max-w-lg p-5 red-shadow">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="text-sm font-bold tracking-widest text-red-500">⚙ PREFERENSI</h2>
+                <button id="prefTutup" class="text-gray-400 text-lg leading-none">✕</button>
+            </div>
+            <label class="text-[10px] text-gray-400 uppercase tracking-widest">Identitas VanGPT (instruksi sistem — mode Astra &amp; WFLabs)</label>
+            <textarea id="prefIdentitas" rows="7" class="w-full mt-2 bg-black border border-gray-800 rounded p-3 text-xs text-gray-200 outline-none resize-y"></textarea>
+            <p class="text-[10px] text-gray-500 mt-2">Tersimpan di browser perangkat ini. Mode Gemini &amp; Ollama memakai prompt bawaannya sendiri.</p>
+            <div class="flex gap-2 mt-4">
+                <button id="prefSimpan" class="flex-1 bg-red-800 hover:bg-red-600 text-white text-xs font-bold p-3 rounded-xl">SIMPAN</button>
+                <button id="prefReset" class="bg-black border border-gray-800 text-gray-300 text-xs font-bold p-3 rounded-xl px-4">RESET</button>
+            </div>
         </div>
     </div>
 
@@ -72,6 +102,7 @@
 
         modeSelector.addEventListener('change', () => {
             document.getElementById('ollamaSettings').classList.toggle('hidden', modeSelector.value !== 'ollama');
+            document.getElementById('wfSettings').classList.toggle('hidden', modeSelector.value !== 'wf');
         });
 
         function appendMessage(role, text) {
@@ -141,7 +172,7 @@
                 const response = await fetch(ASTRA_RELAY_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'x-agent-key': AGENTROUTER_KEY },
-                    body: JSON.stringify({ prompt, system: IDENTITAS_VANGPT, model: 'gpt-6-astra' })
+                    body: JSON.stringify({ prompt, system: identitasAktif(), model: 'gpt-6-astra' })
                 });
                 const data = await response.json().catch(() => ({}));
                 if (data.ok) return data.text;
@@ -153,6 +184,53 @@
                 return 'Koneksi ke relay Astra gagal! Cek internet lalu coba lagi. 🦾';
             }
         }
+
+        // MODE WFLABS — lewat relay Gemini Gateway (WFLabs tanpa CORS untuk browser).
+        // Hanya model yang terbukti bisa dipakai yang ditawarkan.
+        const WF_KEY = "wf-9fc2d802a5b1219f17d437c43dd046b6";
+        const WF_RELAY_URL = "https://gemini-gateway-eight.vercel.app/api/wf";
+        const wfModel = document.getElementById('wfModel');
+
+        // Identitas aktif: dari Preferensi (localStorage) atau bawaan.
+        function identitasAktif() {
+            try { return localStorage.getItem('vangpt_identitas') || IDENTITAS_VANGPT; } catch (e) { return IDENTITAS_VANGPT; }
+        }
+
+        async function callWf(prompt) {
+            const model = wfModel.value;
+            currentKeyName.innerText = 'WFLabs · ' + model.replace('wf/', '');
+            try {
+                const response = await fetch(WF_RELAY_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-wf-key': WF_KEY },
+                    body: JSON.stringify({ prompt, system: identitasAktif(), model })
+                });
+                const data = await response.json().catch(() => ({}));
+                if (data.ok) return data.text;
+                return '⚠ WFLabs menolak: ' + (data.error || ('HTTP ' + response.status)) + ' 💀';
+            } catch (e) {
+                return 'Koneksi ke relay WFLabs gagal! Cek internet lalu coba lagi. 🦾';
+            }
+        }
+
+        // PREFERENSI — editor identitas VanGPT.
+        const prefModal = document.getElementById('prefModal');
+        const prefIdentitas = document.getElementById('prefIdentitas');
+        document.getElementById('prefBtn').addEventListener('click', () => {
+            prefIdentitas.value = identitasAktif();
+            prefModal.classList.remove('hidden');
+        });
+        document.getElementById('prefTutup').addEventListener('click', () => prefModal.classList.add('hidden'));
+        prefModal.addEventListener('click', (e) => { if (e.target === prefModal) prefModal.classList.add('hidden'); });
+        document.getElementById('prefSimpan').addEventListener('click', () => {
+            try { localStorage.setItem('vangpt_identitas', prefIdentitas.value); } catch (e) {}
+            prefModal.classList.add('hidden');
+            appendMessage('ai', '⚙ Identitas VanGPT diperbarui & tersimpan di perangkat ini, Tuan Irvan. 👾');
+        });
+        document.getElementById('prefReset').addEventListener('click', () => {
+            try { localStorage.removeItem('vangpt_identitas'); } catch (e) {}
+            prefIdentitas.value = IDENTITAS_VANGPT;
+        });
 
         async function callOllama(prompt) {
             try {
@@ -172,7 +250,7 @@
             appendMessage('user', text);
             userInput.value = '';
             const loadDiv = appendMessage('ai', 'Memproses perintah...');
-            const result = modeSelector.value === 'api' ? await callGemini(text) : modeSelector.value === 'astra' ? await callAstra(text) : await callOllama(text);
+            const result = modeSelector.value === 'api' ? await callGemini(text) : modeSelector.value === 'astra' ? await callAstra(text) : modeSelector.value === 'wf' ? await callWf(text) : await callOllama(text);
             loadDiv.querySelector('.text-sm').innerText = result;
             chatBox.scrollTop = chatBox.scrollHeight;
         });
