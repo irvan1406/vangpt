@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VanGPT ⟡ Auto-Switch Edition</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
         body { font-family: 'Space+Grotesk', sans-serif; background-color: #050505; color: #e0e0e0; }
@@ -30,7 +29,61 @@
         @media (min-width: 768px) {
             #roomBar, #incogBanner { padding-left: max(1rem, calc((100vw - 56rem) / 2)); padding-right: max(1rem, calc((100vw - 56rem) / 2)); }
         }
-</style>
+        /* CSS statis pengganti Tailwind CDN (dibangkitkan dari kelas yang dipakai halaman ini) */
+        *, ::before, ::after { box-sizing: border-box; }
+        body, h1, h2, h3, p { margin: 0; }
+        button, input, select, textarea { font: inherit; color: inherit; }
+        button { background: none; border: none; cursor: pointer; }
+        img { max-width: 100%; }
+        .fixed { position: fixed; } .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .top-0 { top: 0; } .left-0 { left: 0; } .z-40 { z-index: 40; }
+        .flex { display: flex; } .flex-col { flex-direction: column; } .flex-1 { flex: 1 1 0%; }
+        .hidden { display: none; } .items-center { align-items: center; }
+        .justify-center { justify-content: center; } .justify-between { justify-content: space-between; }
+        .h-screen { height: 100vh; } .h-full { height: 100%; }
+        .h-5 { height: 1.25rem; } .h-9 { height: 2.25rem; } .h-10 { height: 2.5rem; } .h-11 { height: 2.75rem; } .h-12 { height: 3rem; }
+        .w-5 { width: 1.25rem; } .w-9 { width: 2.25rem; } .w-10 { width: 2.5rem; } .w-11 { width: 2.75rem; } .w-12 { width: 3rem; }
+        .w-\[300px\] { width: 300px; } .max-w-\[85\%\] { max-width: 85%; } .max-w-\[85vw\] { max-width: 85vw; } .max-w-\[90\%\] { max-width: 90%; }
+        .overflow-hidden { overflow: hidden; } .overflow-y-auto { overflow-y: auto; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .p-2 { padding: .5rem; } .p-3 { padding: .75rem; } .p-4 { padding: 1rem; }
+        .px-2 { padding-left: .5rem; padding-right: .5rem; } .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-1 { padding-top: .25rem; padding-bottom: .25rem; } .py-2 { padding-top: .5rem; padding-bottom: .5rem; }
+        .mb-1 { margin-bottom: .25rem; } .mb-3 { margin-bottom: .75rem; }
+        .gap-2 { gap: .5rem; } .gap-3 { gap: .75rem; }
+        .text-\[9px\] { font-size: 9px; } .text-\[10px\] { font-size: 10px; } .text-\[11px\] { font-size: 11px; } .text-\[13px\] { font-size: 13px; }
+        .text-xs { font-size: .75rem; } .text-sm { font-size: .875rem; } .text-lg { font-size: 1.125rem; }
+        .font-bold { font-weight: 700; } .font-black { font-weight: 900; } .italic { font-style: italic; }
+        .uppercase { text-transform: uppercase; } .tracking-wide { letter-spacing: .025em; } .tracking-widest { letter-spacing: .1em; }
+        .leading-none { line-height: 1; } .leading-relaxed { line-height: 1.625; }
+        .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .text-white { color: #fff; } .text-gray-200 { color: #e5e7eb; } .text-gray-300 { color: #d1d5db; }
+        .text-gray-400 { color: #9ca3af; } .text-gray-500 { color: #6b7280; }
+        .text-red-500 { color: #ef4444; } .text-red-600 { color: #dc2626; }
+        .text-amber-300 { color: #fcd34d; } .text-amber-400 { color: #fbbf24; }
+        .bg-black { background-color: #000; } .bg-transparent { background-color: transparent; }
+        .bg-black\/50 { background-color: rgba(0,0,0,.5); } .bg-black\/60 { background-color: rgba(0,0,0,.6); } .bg-black\/70 { background-color: rgba(0,0,0,.7); }
+        .bg-red-800 { background-color: #991b1b; } .bg-amber-950\/60 { background-color: rgba(69,26,3,.6); }
+        .border { border: 1px solid; } .border-2 { border: 2px solid; }
+        .border-b { border-bottom: 1px solid; } .border-t { border-top: 1px solid; } .border-r { border-right: 1px solid; }
+        .border-l-4 { border-left: 4px solid; }
+        .border-gray-800 { border-color: #1f2937; } .border-red-600 { border-color: #dc2626; }
+        .border-red-900\/30 { border-color: rgba(127,29,29,.3); } .border-red-900\/40 { border-color: rgba(127,29,29,.4); } .border-red-900\/50 { border-color: rgba(127,29,29,.5); }
+        .border-white\/5 { border-color: rgba(255,255,255,.05); }
+        .border-amber-700\/50 { border-color: rgba(180,83,9,.5); } .border-amber-700\/60 { border-color: rgba(180,83,9,.6); }
+        .bg-red-950\/40 { background-color: rgba(69,10,10,.4); }
+        .rounded { border-radius: .25rem; } .rounded-lg { border-radius: .5rem; } .rounded-xl { border-radius: .75rem; }
+        .rounded-2xl { border-radius: 1rem; } .rounded-full { border-radius: 9999px; }
+        .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0,0,0,.25); }
+        .outline-none { outline: none; } .resize-none { resize: none; } .object-cover { object-fit: cover; }
+        .cursor-pointer { cursor: pointer; } .transition-all { transition: all .15s ease; }
+        .-translate-x-full { transform: translateX(-100%); }
+        .animate-pulse { animation: pulseVan 2s cubic-bezier(.4,0,.6,1) infinite; }
+        @keyframes pulseVan { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        .hover\:bg-red-600:hover { background-color: #dc2626; }
+        .hover\:text-red-400:hover { color: #f87171; }
+        .focus-within\:border-red-600:focus-within { border-color: #dc2626; }
+    </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
     <div id="drawerOverlay" class="hidden fixed inset-0 bg-black/70 z-40"></div>
