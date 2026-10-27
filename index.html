@@ -16,25 +16,57 @@
             #chatBox { padding-left: max(1rem, calc((100vw - 56rem) / 2)); padding-right: max(1rem, calc((100vw - 56rem) / 2)); }
             header { padding-left: max(1rem, calc((100vw - 56rem) / 2)) !important; padding-right: max(1rem, calc((100vw - 56rem) / 2)) !important; }
             body > div.glass.border-t { padding-left: max(1rem, calc((100vw - 56rem) / 2)); padding-right: max(1rem, calc((100vw - 56rem) / 2)); }
-        }    </style>
+        }            /* VANGPT V2 — room, incognito, lampiran, suara */
+        #drawer { transition: transform .25s ease; }
+        .room-item { display: flex; align-items: center; gap: .5rem; width: 100%; text-align: left; padding: .6rem .7rem; border-radius: .75rem; border: 1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.02); cursor: pointer; }
+        .room-item.aktif { border-color: rgba(255,0,0,.55); background: rgba(120,0,0,.18); }
+        .room-item .judul { flex: 1; min-width: 0; }
+        .room-item .judul b { display: block; font-size: 12px; color: #e5e5e5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .room-item .judul span { font-size: 9px; color: #777; letter-spacing: .08em; text-transform: uppercase; }
+        .room-item .hapus { color: #888; padding: .25rem .4rem; border-radius: .5rem; }
+        #micBtn.merekam { background: #b30000 !important; color: #fff !important; }
+        .pesan-gambar { max-width: 220px; border-radius: .75rem; margin-bottom: .5rem; border: 1px solid rgba(255,255,255,.12); }
+        body.incognito #chatBox { box-shadow: inset 0 0 0 2px rgba(255,170,0,.25); }
+        @media (min-width: 768px) {
+            #roomBar, #incogBanner { padding-left: max(1rem, calc((100vw - 56rem) / 2)); padding-right: max(1rem, calc((100vw - 56rem) / 2)); }
+        }
+</style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
+    <div id="drawerOverlay" class="hidden fixed inset-0 bg-black/70 z-40"></div>
+    <aside id="drawer" class="fixed top-0 left-0 h-full w-[300px] max-w-[85vw] z-40 glass border-r border-red-900/40 p-4 flex flex-col gap-3 -translate-x-full">
+        <div class="flex items-center justify-between">
+            <h2 class="text-xs font-bold tracking-widest text-red-500">💬 ROOM CHAT</h2>
+            <button id="drawerTutup" class="text-gray-400 text-lg leading-none">✕</button>
+        </div>
+        <button id="roomBaru" class="bg-red-800 hover:bg-red-600 text-white text-xs font-bold p-3 rounded-xl">＋ ROOM BARU</button>
+        <button id="roomIncognito" class="bg-black border border-amber-700/60 text-amber-400 text-xs font-bold p-3 rounded-xl">🕵️ CHAT INCOGNITO — SEKALI PAKAI</button>
+        <div id="roomList" class="flex-1 overflow-y-auto flex flex-col gap-2"></div>
+        <button id="hapusSemuaRoom" class="text-[10px] text-gray-500 hover:text-red-400 tracking-widest">🗑 HAPUS SEMUA ROOM</button>
+    </aside>
 
     <header class="p-4 glass border-b border-red-900/40 flex justify-between items-center">
         <div class="flex items-center gap-3">
+            <button id="roomBtn" title="Room chat" class="bg-black text-[13px] border border-red-900/50 w-9 h-9 rounded text-red-500 outline-none cursor-pointer">☰</button>
             <div id="statusPulse" class="w-10 h-10 rounded-full border-2 border-red-600 flex items-center justify-center text-red-600 font-bold animate-pulse">V</div>
             <div>
                 <h1 class="text-lg font-bold tracking-widest gradient-text leading-none">VanGPT 2.0</h1>
                 <p class="text-[9px] text-gray-500 uppercase tracking-widest">Master: Tuan Irvan ⟡ <span id="currentKeyName" class="text-red-500">Auto-Rotating Keys</span></p>
             </div>
         </div>
+                <button id="suaraBtn" title="Suara balasan (TTS)" class="bg-black text-[13px] border border-red-900/50 w-9 h-9 rounded text-red-500 outline-none cursor-pointer">🔊</button>
                 <button id="prefBtn" title="Preferensi" class="bg-black text-[13px] border border-red-900/50 w-9 h-9 rounded text-red-500 outline-none cursor-pointer">⚙</button>
         <select id="modeSelector" class="bg-black text-[10px] border border-red-900/50 p-2 rounded text-red-500 font-bold outline-none cursor-pointer">
             <option value="wf">WFLABS · DEEPSEEK + GLM</option>
         </select>
     </header>
 
-    <div id="chatBox" class="flex-1 overflow-y-auto p-4 space-y-4">
+        <div id="roomBar" class="glass border-b border-red-900/30 px-4 py-2 flex items-center gap-2">
+        <span id="roomJudul" class="flex-1 text-[11px] tracking-widest text-gray-300 truncate">💬 ROOM 1</span>
+        <button id="bersihRoom" title="Hapus isi chat ini" class="text-[11px] text-gray-400 border border-gray-800 rounded px-2 py-1">🧹 HAPUS CHAT</button>
+    </div>
+    <div id="incogBanner" class="hidden bg-amber-950/60 border-b border-amber-700/50 text-amber-300 text-[11px] px-4 py-2 tracking-wide">🕵️ MODE INCOGNITO — chat ini TIDAK disimpan. Keluar room / refresh = hilang selamanya.</div>
+<div id="chatBox" class="flex-1 overflow-y-auto p-4 space-y-4">
         <div class="glass p-4 rounded-2xl max-w-[90%] border-l-4 border-red-600 red-shadow">
             <p class="text-[10px] text-red-600 font-black mb-1">SYSTEM NOTIFICATION</p>
             <p class="text-sm italic leading-relaxed text-gray-300">"Kunci telah terbuka, Tuan Irvan. Sistem Auto-Rotate aktif. Gunakan kekuatan ini sesukamu. 💀🔥"</p>
@@ -54,13 +86,23 @@
             </select>
         </div>
         
-        <div class="flex gap-3 bg-black/50 p-2 rounded-2xl border border-white/5 focus-within:border-red-600 transition-all">
+                <div id="gambarChip" class="hidden mb-3 flex items-center gap-3 bg-black/60 border border-red-900/40 rounded-xl p-2">
+            <img id="gambarThumb" class="w-11 h-11 object-cover rounded-lg" alt="lampiran">
+            <span class="flex-1 text-[10px] text-gray-400">Gambar terlampir — paling pas dibaca model DeepSeek / Nemotron.</span>
+            <button id="gambarBatal" class="text-gray-400 px-2">✕</button>
+        </div>
+<div class="flex gap-3 bg-black/50 p-2 rounded-2xl border border-white/5 focus-within:border-red-600 transition-all">
+            <button id="lampiranBtn" title="Lampirkan gambar" class="bg-black border border-gray-800 text-gray-300 w-12 h-12 rounded-xl flex items-center justify-center">📎</button>
             <textarea id="userInput" rows="1" placeholder="Masukkan perintah..." class="flex-1 bg-transparent p-2 text-sm outline-none resize-none" style="min-height: 44px;"></textarea>
+            <button id="micBtn" title="Perintah suara" class="bg-black border border-gray-800 text-gray-300 w-12 h-12 rounded-xl flex items-center justify-center">🎤</button>
             <button id="sendBtn" class="bg-red-800 hover:bg-red-600 text-white w-12 h-12 rounded-xl flex items-center justify-center transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
             </button>
         </div>
     </div>
+
+    <input type="file" id="fileGambar" accept="image/*" class="hidden">
+    <input type="file" id="fileImpor" accept=".json,application/json" class="hidden">
 
     <div id="prefModal" class="hidden fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
         <div class="glass rounded-2xl w-full max-w-lg p-5 red-shadow">
@@ -75,6 +117,11 @@
                 <button id="prefSimpan" class="flex-1 bg-red-800 hover:bg-red-600 text-white text-xs font-bold p-3 rounded-xl">SIMPAN</button>
                 <button id="prefReset" class="bg-black border border-gray-800 text-gray-300 text-xs font-bold p-3 rounded-xl px-4">RESET</button>
             </div>
+            <div class="flex gap-2 mt-2">
+                <button id="prefEkspor" class="flex-1 bg-black border border-gray-800 text-gray-300 text-xs font-bold p-3 rounded-xl">💾 EKSPOR KE FILE</button>
+                <button id="prefImpor" class="flex-1 bg-black border border-gray-800 text-gray-300 text-xs font-bold p-3 rounded-xl">📂 IMPOR DARI FILE</button>
+            </div>
+            <p class="text-[10px] text-gray-500 mt-2">Preferensi (identitas + setelan suara) bisa disimpan sebagai file JSON dan dimuat lagi di perangkat lain.</p>
         </div>
     </div>
 
@@ -102,12 +149,17 @@
             document.getElementById('wfSettings').classList.toggle('hidden', modeSelector.value !== 'wf');
         });
 
-        function appendMessage(role, text) {
+        function escTeks(s) {
+            return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+        }
+
+        function appendMessage(role, text, gambar) {
             const div = document.createElement('div');
             div.className = role === 'user' ? 'flex justify-end' : 'flex justify-start';
             const bgColor = role === 'user' ? 'bg-red-950/40 border border-red-900/30' : 'glass border-l-4 border-red-600';
             const name = role === 'user' ? 'TUAN IRVAN' : 'VANGPT';
-            div.innerHTML = `<div class="${bgColor} p-4 rounded-2xl max-w-[85%] shadow-2xl"><p class="text-[9px] font-black mb-1 tracking-widest ${role === 'user' ? 'text-gray-400' : 'text-red-600'}">${name}</p><p class="text-sm text-gray-200">${text}</p></div>`;
+            const imgHtml = gambar ? `<img src="${gambar}" class="pesan-gambar" alt="gambar terlampir">` : '';
+            div.innerHTML = `<div class="${bgColor} p-4 rounded-2xl max-w-[85%] shadow-2xl"><p class="text-[9px] font-black mb-1 tracking-widest ${role === 'user' ? 'text-gray-400' : 'text-red-600'}">${name}</p>${imgHtml}<p class="text-sm text-gray-200">${escTeks(text)}</p></div>`;
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
             return div;
@@ -193,14 +245,17 @@
             try { return localStorage.getItem('vangpt_identitas') || IDENTITAS_VANGPT; } catch (e) { return IDENTITAS_VANGPT; }
         }
 
-        async function callWf(prompt) {
+        async function callWf(prompt, riwayat, gambar) {
             const model = wfModel.value;
             currentKeyName.innerText = 'WFLabs · ' + model.replace('wf/', '');
             try {
+                const body = { prompt, system: identitasAktif(), model };
+                if (Array.isArray(riwayat) && riwayat.length) body.history = riwayat;
+                if (gambar) body.image = gambar;
                 const response = await fetch(WF_RELAY_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'x-wf-key': WF_KEY },
-                    body: JSON.stringify({ prompt, system: identitasAktif(), model })
+                    body: JSON.stringify(body)
                 });
                 const data = await response.json().catch(() => ({}));
                 if (data.ok) return data.text;
@@ -209,7 +264,6 @@
                 return 'Koneksi ke relay WFLabs gagal! Cek internet lalu coba lagi. 🦾';
             }
         }
-
         // PREFERENSI — editor identitas VanGPT.
         const prefModal = document.getElementById('prefModal');
         const prefIdentitas = document.getElementById('prefIdentitas');
@@ -243,16 +297,247 @@
 
         modeSelector.dispatchEvent(new Event('change'));
 
+        // ================= VANGPT V2 — ROOM, RIWAYAT, INCOGNITO, MEDIA, SUARA =================
+        const KUNCI_ROOMS = 'vangpt_rooms_v2';
+        const KUNCI_AKTIF = 'vangpt_room_aktif';
+        const KUNCI_SUARA = 'vangpt_suara';
+        const drawer = document.getElementById('drawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const roomList = document.getElementById('roomList');
+        const roomJudul = document.getElementById('roomJudul');
+        const incogBanner = document.getElementById('incogBanner');
+        const gambarChip = document.getElementById('gambarChip');
+        const gambarThumb = document.getElementById('gambarThumb');
+        const fileGambar = document.getElementById('fileGambar');
+        const fileImpor = document.getElementById('fileImpor');
+        const suaraBtn = document.getElementById('suaraBtn');
+        let rooms = [];
+        let roomAktifId = null;
+        let modeIncog = false;
+        let pesanIncog = [];
+        let draftGambar = null;
+
+        const SAPAAN_HTML = `<div class="glass p-4 rounded-2xl max-w-[90%] border-l-4 border-red-600 red-shadow"><p class="text-[10px] text-red-600 font-black mb-1">SYSTEM NOTIFICATION</p><p class="text-sm italic leading-relaxed text-gray-300">"Kunci telah terbuka, Tuan Irvan. Sistem Auto-Rotate aktif. Gunakan kekuatan ini sesukamu. 💀🔥"</p></div>`;
+
+        function idBaru() { return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+
+        function simpanRooms() {
+            try { localStorage.setItem(KUNCI_ROOMS, JSON.stringify(rooms)); localStorage.setItem(KUNCI_AKTIF, roomAktifId || ''); } catch (e) {}
+        }
+        function muatRooms() {
+            try { rooms = JSON.parse(localStorage.getItem(KUNCI_ROOMS) || '[]'); } catch (e) { rooms = []; }
+            if (!Array.isArray(rooms)) rooms = [];
+            rooms = rooms.filter(r => r && r.id && Array.isArray(r.pesan));
+            if (!rooms.length) rooms.push({ id: idBaru(), nama: 'Room 1', dibuat: Date.now(), pesan: [] });
+            let aktif = null;
+            try { aktif = localStorage.getItem(KUNCI_AKTIF); } catch (e) {}
+            roomAktifId = rooms.some(r => r.id === aktif) ? aktif : rooms[0].id;
+        }
+        function roomAktif() { return rooms.find(r => r.id === roomAktifId) || rooms[0]; }
+        function pesanAktif() { return modeIncog ? pesanIncog : roomAktif().pesan; }
+
+        function renderRoomList() {
+            roomList.innerHTML = '';
+            rooms.forEach(r => {
+                const item = document.createElement('div');
+                item.className = 'room-item' + (!modeIncog && r.id === roomAktifId ? ' aktif' : '');
+                const tgl = new Date(r.dibuat).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
+                item.innerHTML = `<div class="judul"><b></b><span>${r.pesan.length} pesan · ${tgl}</span></div><button class="hapus" title="Hapus room">🗑</button>`;
+                item.querySelector('b').innerText = r.nama;
+                item.querySelector('.judul').addEventListener('click', () => { keluarIncog(false); roomAktifId = r.id; simpanRooms(); tutupDrawer(); tampilkanPesan(); renderRoomList(); });
+                item.querySelector('.hapus').addEventListener('click', (e) => { e.stopPropagation(); hapusRoom(r.id); });
+                roomList.appendChild(item);
+            });
+        }
+
+        function tampilkanPesan() {
+            chatBox.innerHTML = '';
+            const daftar = pesanAktif();
+            document.body.classList.toggle('incognito', modeIncog);
+            incogBanner.classList.toggle('hidden', !modeIncog);
+            roomJudul.innerText = modeIncog ? '🕵️ INCOGNITO — TIDAK DISIMPAN' : ('💬 ' + roomAktif().nama.toUpperCase());
+            if (!daftar.length) { chatBox.innerHTML = SAPAAN_HTML; return; }
+            daftar.forEach(m => appendMessage(m.r === 'u' ? 'user' : 'ai', m.t, m.g || null));
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function tambahPesan(role, text, gambar) {
+            const daftar = pesanAktif();
+            daftar.push({ r: role === 'user' ? 'u' : 'a', t: text, g: gambar || undefined });
+            if (!modeIncog) {
+                const r = roomAktif();
+                if (role === 'user' && r.pesan.filter(m => m.r === 'u').length === 1) {
+                    r.nama = text.replace(/\s+/g, ' ').slice(0, 30) || r.nama;
+                }
+                simpanRooms(); renderRoomList();
+            }
+        }
+
+        function hapusRoom(id) {
+            const r = rooms.find(x => x.id === id);
+            if (!r) return;
+            if (!confirm('Hapus room "' + r.nama + '" beserta semua chatnya?')) return;
+            rooms = rooms.filter(x => x.id !== id);
+            if (!rooms.length) rooms.push({ id: idBaru(), nama: 'Room 1', dibuat: Date.now(), pesan: [] });
+            if (roomAktifId === id) roomAktifId = rooms[0].id;
+            simpanRooms(); renderRoomList();
+            if (!modeIncog) tampilkanPesan();
+        }
+
+        function keluarIncog(buang) {
+            if (!modeIncog) return;
+            modeIncog = false;
+            if (buang !== false) pesanIncog = [];
+        }
+
+        function bukaDrawer() { drawer.classList.remove('-translate-x-full'); drawerOverlay.classList.remove('hidden'); renderRoomList(); }
+        function tutupDrawer() { drawer.classList.add('-translate-x-full'); drawerOverlay.classList.add('hidden'); }
+        document.getElementById('roomBtn').addEventListener('click', bukaDrawer);
+        document.getElementById('drawerTutup').addEventListener('click', tutupDrawer);
+        drawerOverlay.addEventListener('click', tutupDrawer);
+        document.getElementById('roomBaru').addEventListener('click', () => {
+            keluarIncog();
+            const r = { id: idBaru(), nama: 'Room ' + (rooms.length + 1), dibuat: Date.now(), pesan: [] };
+            rooms.unshift(r); roomAktifId = r.id;
+            simpanRooms(); tutupDrawer(); tampilkanPesan(); renderRoomList();
+            userInput.focus();
+        });
+        document.getElementById('roomIncognito').addEventListener('click', () => {
+            modeIncog = true; pesanIncog = [];
+            tutupDrawer(); tampilkanPesan(); renderRoomList();
+            userInput.focus();
+        });
+        document.getElementById('hapusSemuaRoom').addEventListener('click', () => {
+            if (!confirm('Hapus SEMUA room dan seluruh riwayat chat? Tindakan ini permanen.')) return;
+            rooms = [{ id: idBaru(), nama: 'Room 1', dibuat: Date.now(), pesan: [] }];
+            roomAktifId = rooms[0].id; keluarIncog();
+            simpanRooms(); tutupDrawer(); tampilkanPesan(); renderRoomList();
+        });
+        document.getElementById('bersihRoom').addEventListener('click', () => {
+            if (!confirm('Hapus semua isi chat ini?')) return;
+            if (modeIncog) pesanIncog = []; else { roomAktif().pesan = []; simpanRooms(); renderRoomList(); }
+            tampilkanPesan();
+        });
+
+        // ---- Lampiran gambar (dikompres maksimal 768px sebelum dikirim/disimpan) ----
+        document.getElementById('lampiranBtn').addEventListener('click', () => fileGambar.click());
+        fileGambar.addEventListener('change', () => {
+            const f = fileGambar.files && fileGambar.files[0];
+            fileGambar.value = '';
+            if (!f) return;
+            const url = URL.createObjectURL(f);
+            const img = new Image();
+            img.onload = () => {
+                try {
+                    const skala = Math.min(1, 768 / Math.max(img.width, img.height));
+                    const cv = document.createElement('canvas');
+                    cv.width = Math.round(img.width * skala); cv.height = Math.round(img.height * skala);
+                    cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+                    draftGambar = cv.toDataURL('image/jpeg', 0.82);
+                    gambarThumb.src = draftGambar;
+                    gambarChip.classList.remove('hidden');
+                } catch (e) { appendMessage('ai', '⚠ Gambar gagal diproses di perangkat ini.'); }
+                URL.revokeObjectURL(url);
+            };
+            img.onerror = () => { URL.revokeObjectURL(url); appendMessage('ai', '⚠ File itu bukan gambar yang bisa dibaca.'); };
+            img.src = url;
+        });
+        document.getElementById('gambarBatal').addEventListener('click', () => { draftGambar = null; gambarChip.classList.add('hidden'); });
+
+        // ---- Suara: masukan (STT) ----
+        const micBtn = document.getElementById('micBtn');
+        let rekaman = null;
+        micBtn.addEventListener('click', () => {
+            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SR) { appendMessage('ai', '🎤 Perangkat ini tidak menyediakan input suara untuk WebView. Coba keyboard suara (Gboard) sebagai gantinya, Tuan.'); return; }
+            if (rekaman) { try { rekaman.stop(); } catch (e) {} return; }
+            rekaman = new SR();
+            rekaman.lang = 'id-ID';
+            rekaman.interimResults = false;
+            micBtn.classList.add('merekam');
+            rekaman.onresult = (ev) => { try { userInput.value = ev.results[0][0].transcript; } catch (e) {} };
+            rekaman.onend = () => { micBtn.classList.remove('merekam'); rekaman = null; userInput.focus(); };
+            rekaman.onerror = () => { micBtn.classList.remove('merekam'); rekaman = null; };
+            try { rekaman.start(); } catch (e) { micBtn.classList.remove('merekam'); rekaman = null; }
+        });
+
+        // ---- Suara: balasan dibacakan (TTS) ----
+        function suaraAktif() { try { return localStorage.getItem(KUNCI_SUARA) === '1'; } catch (e) { return false; } }
+        function segarkanSuaraBtn() { suaraBtn.style.opacity = suaraAktif() ? '1' : '0.35'; }
+        suaraBtn.addEventListener('click', () => {
+            const baru = !suaraAktif();
+            try { localStorage.setItem(KUNCI_SUARA, baru ? '1' : '0'); } catch (e) {}
+            if (!baru && 'speechSynthesis' in window) speechSynthesis.cancel();
+            segarkanSuaraBtn();
+        });
+        function ucapkan(teks) {
+            if (!suaraAktif() || !('speechSynthesis' in window)) return;
+            if (/^⚠|^Koneksi/.test(teks)) return;
+            try {
+                speechSynthesis.cancel();
+                const bersih = String(teks).replace(/[#*_`>~]/g, '').slice(0, 700);
+                const u = new SpeechSynthesisUtterance(bersih);
+                u.lang = 'id-ID'; u.rate = 1.03;
+                speechSynthesis.speak(u);
+            } catch (e) {}
+        }
+
+        // ---- Preferensi sebagai file (ekspor / impor) ----
+        document.getElementById('prefEkspor').addEventListener('click', () => {
+            const data = { tipe: 'vangpt-preferensi', versi: 1, identitas: identitasAktif(), suara: suaraAktif() };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'vangpt-preferensi.json';
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+        });
+        document.getElementById('prefImpor').addEventListener('click', () => fileImpor.click());
+        fileImpor.addEventListener('change', () => {
+            const f = fileImpor.files && fileImpor.files[0];
+            fileImpor.value = '';
+            if (!f) return;
+            const rd = new FileReader();
+            rd.onload = () => {
+                try {
+                    const data = JSON.parse(String(rd.result || ''));
+                    if (data.tipe !== 'vangpt-preferensi') throw new Error('bukan file preferensi VanGPT');
+                    if (typeof data.identitas === 'string') { try { localStorage.setItem('vangpt_identitas', data.identitas); } catch (e) {} prefIdentitas.value = data.identitas; }
+                    if (typeof data.suara === 'boolean') { try { localStorage.setItem(KUNCI_SUARA, data.suara ? '1' : '0'); } catch (e) {} segarkanSuaraBtn(); }
+                    appendMessage('ai', '📂 Preferensi dimuat dari file. Identitas & setelan suara diperbarui, Tuan Irvan. 👾');
+                } catch (e) { appendMessage('ai', '⚠ File preferensi tidak sah: ' + e.message); }
+            };
+            rd.readAsText(f);
+        });
+
+        // ---- Kirim (room-aware, memori per room ikut terkirim) ----
         sendBtn.addEventListener('click', async () => {
             const text = userInput.value.trim();
-            if (!text) return;
-            appendMessage('user', text);
+            if (!text && !draftGambar) return;
+            const gambar = draftGambar;
+            const teksKirim = text || '(lihat gambar ini)';
+            const riwayat = pesanAktif().map(m => ({ role: m.r === 'u' ? 'user' : 'assistant', text: m.g ? (m.t + ' [dengan gambar terlampir]') : m.t }));
+            tambahPesan('user', teksKirim, gambar);
+            appendMessage('user', teksKirim, gambar);
             userInput.value = '';
+            draftGambar = null; gambarChip.classList.add('hidden');
             const loadDiv = appendMessage('ai', 'Memproses perintah...');
-            const result = modeSelector.value === 'api' ? await callGemini(text) : modeSelector.value === 'astra' ? await callAstra(text) : modeSelector.value === 'wf' ? await callWf(text) : await callOllama(text);
+            let result;
+            if (modeSelector.value === 'wf') result = await callWf(teksKirim, riwayat, gambar);
+            else if (modeSelector.value === 'astra') result = await callAstra(teksKirim);
+            else if (modeSelector.value === 'api') result = await callGemini(teksKirim);
+            else result = await callOllama(teksKirim);
             loadDiv.querySelector('.text-sm').innerText = result;
             chatBox.scrollTop = chatBox.scrollHeight;
+            tambahPesan('ai', result, null);
+            ucapkan(result);
         });
+
+        // ---- Init V2 ----
+        muatRooms();
+        segarkanSuaraBtn();
+        tampilkanPesan();
+        renderRoomList();
 
         userInput.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendBtn.click(); } });
     </script>
