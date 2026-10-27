@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VanGPT — Admin Konfigurasi</title>
+<style>
+  body { font-family: system-ui, sans-serif; background: #050505; color: #e0e0e0; margin: 0; padding: 16px; }
+  .kotak { max-width: 640px; margin: 0 auto; background: rgba(15,15,15,.97); border: 1px solid rgba(255,0,0,.25); border-radius: 16px; padding: 20px; }
+  h1 { font-size: 15px; letter-spacing: .2em; color: #ff2a1a; margin: 0 0 4px; }
+  p.sub { font-size: 11px; color: #888; margin: 0 0 16px; line-height: 1.6; }
+  label { display: block; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: #999; margin: 14px 0 6px; }
+  input, select, textarea { width: 100%; box-sizing: border-box; background: #000; border: 1px solid #333; border-radius: 10px; color: #eee; padding: 11px; font-size: 13px; outline: none; }
+  textarea { resize: vertical; line-height: 1.6; }
+  button { border: 0; border-radius: 12px; padding: 13px; font-weight: bold; font-size: 12px; cursor: pointer; }
+  .simpan { background: #b30000; color: #fff; width: 100%; margin-top: 18px; }
+  .muat { background: #111; color: #ccc; border: 1px solid #333; width: 100%; margin-top: 8px; }
+  #status { font-size: 12px; margin-top: 14px; min-height: 18px; line-height: 1.6; }
+  a { color: #ff5040; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="kotak">
+  <h1>👾 VANGPT — ADMIN</h1>
+  <p class="sub">Halaman ini mengatur VanGPT untuk <b>semua pengguna</b>: model AI dan karakter/identitasnya. Pengguna biasa tidak melihat pengaturan apa pun di aplikasi. Perubahan berlaku begitu diterbitkan (beri waktu ±1 menit untuk menyebar). Halaman ini sendiri tidak berkunci — yang mengunci adalah <b>token GitHub</b> kamu: tanpa token yang benar, tidak ada yang bisa menyimpan perubahan.</p>
+
+  <label>Token GitHub (Personal Access Token — sama seperti admin webirvan)</label>
+  <input type="password" id="pat" placeholder="ghp_… / github_pat_…" autocomplete="off">
+
+  <label>Model AI (berlaku global)</label>
+  <select id="model">
+    <option value="wf/deepseek-v4.1-flash">DeepSeek V4.1 Flash — chat + vision</option>
+    <option value="wf/deepseek-v4.1-flash-1017">DeepSeek V4.1 Flash 1017 — chat</option>
+    <option value="wf/glm-5.3-flash">GLM 5.3 Flash — chat (reasoning)</option>
+    <option value="wf/nvidia-nemotron-3.5-super-vl-120b-a12b-nvfp4">Nemotron VL 120B — vision</option>
+  </select>
+
+  <label>Karakter / Identitas VanGPT (instruksi sistem — isi sendiri)</label>
+  <textarea id="identitas" rows="10" placeholder="Tulis karakter VanGPT di sini…"></textarea>
+
+  <button class="simpan" id="simpan">💾 SIMPAN &amp; TERBITKAN UNTUK SEMUA</button>
+  <button class="muat" id="muatUlang">↻ Muat ulang konfigurasi saat ini</button>
+  <div id="status"></div>
+  <p class="sub" style="margin-top:16px"><a href="./">← Buka aplikasi VanGPT</a></p>
+</div>
+
+<script>
+  const REPO = "irvan1406/vangpt", PATH = "config.json";
+  const patEl = document.getElementById('pat');
+  const modelEl = document.getElementById('model');
+  const identitasEl = document.getElementById('identitas');
+  const statusEl = document.getElementById('status');
+  try { patEl.value = sessionStorage.getItem('vg_pat') || ''; } catch (e) {}
+  patEl.addEventListener('change', () => { try { sessionStorage.setItem('vg_pat', patEl.value.trim()); } catch (e) {} });
+
+  function status(teks, ok) { statusEl.textContent = teks; statusEl.style.color = ok === false ? '#ff5040' : '#7ee787'; }
+  function b64e(str) { return btoa(unescape(encodeURIComponent(str))); }
+  function b64d(b64) { return decodeURIComponent(escape(atob(String(b64).replace(/\s/g, '')))); }
+
+  async function muat() {
+    try {
+      const r = await fetch('config.json?ts=' + Date.now(), { cache: 'no-store' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const c = await r.json();
+      if (c.model) modelEl.value = c.model;
+      if (typeof c.identitas === 'string') identitasEl.value = c.identitas;
+      status('Konfigurasi saat ini dimuat.');
+    } catch (e) { status('Gagal memuat konfigurasi: ' + e.message, false); }
+  }
+
+  document.getElementById('muatUlang').addEventListener('click', muat);
+
+  document.getElementById('simpan').addEventListener('click', async () => {
+    const pat = patEl.value.trim();
+    if (!pat) { status('Isi dulu token GitHub-nya, Tuan.', false); return; }
+    try { sessionStorage.setItem('vg_pat', pat); } catch (e) {}
+    const isi = JSON.stringify({ model: modelEl.value, identitas: identitasEl.value }, null, 1) + '\n';
+    const api = 'https://api.github.com/repos/' + REPO + '/contents/' + PATH;
+    const headers = { 'Authorization': 'Bearer ' + pat, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' };
+    status('Menyimpan…');
+    try {
+      const g = await fetch(api, { headers });
+      if (!g.ok) throw new Error('token ditolak / berkas tidak ditemukan (HTTP ' + g.status + ')');
+      const gj = await g.json();
+      const p = await fetch(api, { method: 'PUT', headers, body: JSON.stringify({ message: 'Perbarui konfigurasi VanGPT lewat admin', content: b64e(isi), sha: gj.sha }) });
+      if (!p.ok) { const pj = await p.json().catch(() => ({})); throw new Error(pj.message || ('HTTP ' + p.status)); }
+      status('✅ Tersimpan & diterbitkan. Semua pengguna VanGPT mengikuti model & karakter baru ini (beri waktu ±1 menit untuk menyebar).');
+    } catch (e) { status('Gagal menyimpan: ' + e.message, false); }
+  });
+
+  muat();
+</script>
+</body>
+</html>
