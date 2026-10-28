@@ -92,15 +92,15 @@
         .gradient-text { background: none; -webkit-text-fill-color: #f5f5f7; color: #f5f5f7; }
         .red-shadow { box-shadow: 0 1px 2px rgba(0,0,0,.4); }
         .border-red-900\/30, .border-red-900\/40, .border-red-900\/50 { border-color: rgba(255,255,255,.08); }
-        .border-red-600 { border-color: #4d6bfe; }
-        .text-red-500 { color: #9db1ff; } .text-red-600 { color: #9db1ff; }
-        .hover\:text-red-400:hover { color: #c3cfff; }
-        .bg-red-800 { background-color: #4d6bfe; }
-        .hover\:bg-red-600:hover { background-color: #6380ff; }
-        .focus-within\:border-red-600:focus-within { border-color: #4d6bfe; }
+        .border-red-600 { border-color: #dc2626; }
+        .text-red-500 { color: #f87171; } .text-red-600 { color: #f87171; }
+        .hover\:text-red-400:hover { color: #fca5a5; }
+        .bg-red-800 { background-color: #dc2626; }
+        .hover\:bg-red-600:hover { background-color: #ef4444; }
+        .focus-within\:border-red-600:focus-within { border-color: #dc2626; }
         .bg-red-950\/40 { background-color: #26272e; }
         .room-item { border-color: rgba(255,255,255,.07); background: rgba(255,255,255,.03); border-radius: .65rem; }
-        .room-item.aktif { border-color: rgba(77,107,254,.6); background: rgba(77,107,254,.14); }
+        .room-item.aktif { border-color: rgba(220,38,38,.6); background: rgba(220,38,38,.14); }
         body.incognito #chatBox { box-shadow: inset 0 0 0 2px rgba(255,170,0,.18); }
         header.glass, #roomBar.glass { background: rgba(23,24,29,.92); }
         #chatBox { scrollbar-width: thin; }
@@ -109,7 +109,7 @@
         .baris-user { display: flex; justify-content: flex-end; }
         .gelembung-user { background: #26272e; color: #f3f4f6; padding: .65rem .95rem; border-radius: 1.15rem; max-width: 85%; font-size: 15px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; }
         .baris-ai { display: block; }
-        .label-ai { font-size: 11px; font-weight: 600; letter-spacing: .04em; color: #9db1ff; margin-bottom: .3rem; }
+        .label-ai { font-size: 11px; font-weight: 600; letter-spacing: .04em; color: #f87171; margin-bottom: .3rem; }
         .isi-pesan { font-size: 15px; line-height: 1.65; color: #e8e9ec; word-break: break-word; }
         .isi-pesan .md-p { margin: 0 0 .6rem; }
         .isi-pesan .md-p:last-child { margin-bottom: 0; }
@@ -120,7 +120,7 @@
         .isi-pesan li { margin: .18rem 0; }
         .isi-pesan blockquote { border-left: 3px solid rgba(255,255,255,.18); padding-left: .8rem; color: #b9bcc4; margin: .4rem 0 .7rem; }
         .isi-pesan hr { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: .9rem 0; }
-        .isi-pesan a { color: #8ea2ff; text-decoration: underline; }
+        .isi-pesan a { color: #f87171; text-decoration: underline; }
         .ikode { background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.07); padding: .05rem .35rem; border-radius: .35rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .86em; }
         .kotak-kode { background: #0b0c0f; border: 1px solid rgba(255,255,255,.1); border-radius: .8rem; overflow: hidden; margin: .5rem 0 .8rem; }
         .kk-head { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,.05); padding: .4rem .7rem; font-size: 11px; color: #9aa0ab; }
@@ -139,15 +139,50 @@
         .aksi-pesan button { font-size: 11px; font-weight: 500; color: #9aa0ab; background: transparent; border: 1px solid rgba(255,255,255,.09); padding: .3rem .7rem; border-radius: 9999px; cursor: pointer; }
         .aksi-pesan button:active { background: rgba(255,255,255,.08); color: #fff; }
         .baris-user .aksi-pesan { justify-content: flex-end; }
-        .area-edit { width: 100%; min-width: 220px; background: #101114; color: #f3f4f6; border: 1px solid rgba(77,107,254,.55); border-radius: .8rem; padding: .6rem .7rem; font-size: 14px; line-height: 1.5; outline: none; resize: vertical; }
+        .area-edit { width: 100%; min-width: 220px; background: #101114; color: #f3f4f6; border: 1px solid rgba(220,38,38,.55); border-radius: .8rem; padding: .6rem .7rem; font-size: 14px; line-height: 1.5; outline: none; resize: vertical; }
         .tombol-edit { display: flex; gap: .4rem; margin-top: .5rem; }
         .tombol-edit button { font-size: 12px; font-weight: 600; padding: .45rem .85rem; border-radius: 9999px; cursor: pointer; }
-        .te-kirim { background: #4d6bfe; color: #fff; }
+        .te-kirim { background: #dc2626; color: #fff; }
         .te-batal { background: transparent; color: #9aa0ab; border: 1px solid rgba(255,255,255,.12); }
         .titik { display: inline-flex; gap: 5px; padding: .35rem 0; }
         .titik i { width: 7px; height: 7px; border-radius: 50%; background: #8b8f98; display: block; animation: titikLompat 1.2s infinite; }
         .titik i:nth-child(2) { animation-delay: .15s; } .titik i:nth-child(3) { animation-delay: .3s; }
         @keyframes titikLompat { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-4px); opacity: 1; } }
+
+        /* ===== V4 — bar simpel, komposer gaya Muse, menu tekan-tahan, pratinjau HTML, mode berpikir ===== */
+        header.glass { background: #0f1013; border-bottom: 1px solid rgba(255,255,255,.06); padding-top: .5rem; padding-bottom: .5rem; }
+        #roomBtn, #suaraBtn, #chatBaruBtn { background: transparent; border: none; color: #c9ccd4; width: 38px; height: 38px; border-radius: 10px; font-size: 17px; display: flex; align-items: center; justify-content: center; flex: none; cursor: pointer; }
+        #roomBtn:active, #suaraBtn:active, #chatBaruBtn:active { background: rgba(255,255,255,.08); }
+        #roomJudul { font-size: 14.5px; font-weight: 600; color: #f0f0f2; text-align: center; }
+        #bungkusBawah { background: #0f1013; border-top: 1px solid rgba(255,255,255,.05); padding-top: .7rem; padding-bottom: calc(.7rem + env(safe-area-inset-bottom)); }
+        .komposer { background: #1d1e23; border: 1px solid rgba(255,255,255,.09); border-radius: 26px; padding: .5rem .55rem .45rem; }
+        .komposer textarea { width: 100%; background: transparent; border: none; outline: none; resize: none; font-size: 15.5px; line-height: 1.45; color: #f3f4f6; padding: .35rem .45rem 0; max-height: 150px; }
+        .komposer-bawah { display: flex; align-items: center; gap: .35rem; margin-top: .25rem; }
+        .tombol-pil { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #c9ccd4; font-size: 21px; background: transparent; border: none; cursor: pointer; flex: none; }
+        .tombol-pil:active { background: rgba(255,255,255,.09); }
+        #micBtn.merekam { background: #dc2626 !important; color: #fff !important; border-radius: 50%; }
+        .pil-pikir { font-size: 12px; font-weight: 600; color: #9aa0ab; border: 1px solid rgba(255,255,255,.12); border-radius: 9999px; padding: .42rem .7rem; background: transparent; cursor: pointer; flex: none; }
+        .pil-pikir.aktif { color: #fca5a5; border-color: rgba(220,38,38,.6); background: rgba(220,38,38,.13); }
+        #sendBtn { width: 38px; height: 38px; border-radius: 50%; background: #dc2626; color: #fff; display: flex; align-items: center; justify-content: center; flex: none; cursor: pointer; border: none; }
+        #sendBtn:active { background: #ef4444; }
+        .chip-berkas { font-size: 11px; color: #d8dbe2; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.09); padding: .3rem .6rem; border-radius: .6rem; margin-bottom: .4rem; max-width: 85%; word-break: break-all; }
+        .baris-user, .baris-ai { -webkit-tap-highlight-color: transparent; }
+        .baris-user .gelembung-user, .baris-ai { -webkit-touch-callout: none; }
+        .tekan-aktif { filter: brightness(1.4); }
+        #menuLatar { position: fixed; inset: 0; z-index: 89; background: rgba(0,0,0,.25); }
+        #menuKonteks { position: fixed; z-index: 90; background: #23242a; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 5px; min-width: 172px; box-shadow: 0 14px 34px rgba(0,0,0,.55); }
+        #menuKonteks button { display: flex; width: 100%; text-align: left; padding: 10px 12px; font-size: 14px; color: #ececf1; border-radius: 9px; background: transparent; border: none; cursor: pointer; gap: 9px; align-items: center; }
+        #menuKonteks button:active { background: rgba(255,255,255,.09); }
+        #previewOverlay { position: fixed; inset: 0; z-index: 95; background: #0f1013; }
+        #previewOverlay:not(.hidden) { display: flex; flex-direction: column; }
+        #previewOverlay .pv-head { display: flex; align-items: center; gap: .6rem; padding: .6rem .8rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+        #previewFrame { flex: 1; width: 100%; border: none; background: #fff; }
+        .kk-aksi { display: flex; gap: .4rem; }
+        .panel-pikir { border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.03); border-radius: .7rem; margin-bottom: .6rem; }
+        .panel-pikir summary { cursor: pointer; padding: .5rem .75rem; font-size: 12.5px; font-weight: 600; color: #fca5a5; list-style: none; }
+        .panel-pikir summary::-webkit-details-marker { display: none; }
+        .panel-pikir .isi-pikir { padding: 0 .75rem .6rem; font-size: 13.5px; color: #b9bcc4; line-height: 1.6; }
+        .berpikir { display: inline-flex; align-items: center; gap: .55rem; color: #9aa0ab; font-size: 13.5px; }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
@@ -160,25 +195,18 @@
         <button id="roomBaru" class="bg-red-800 hover:bg-red-600 text-white text-xs font-bold p-3 rounded-xl">+ Room Baru</button>
         <button id="roomIncognito" class="bg-black border border-amber-700/60 text-amber-400 text-xs font-bold p-3 rounded-xl">Chat Incognito — Sekali Pakai</button>
         <div id="roomList" class="flex-1 overflow-y-auto flex flex-col gap-2"></div>
+        <button id="bersihRoom" class="text-[10px] text-gray-500 hover:text-red-400 tracking-widest">Hapus Isi Chat Ini</button>
         <button id="hapusSemuaRoom" class="text-[10px] text-gray-500 hover:text-red-400 tracking-widest">Hapus Semua Room</button>
     </aside>
 
-    <header class="p-4 glass border-b border-red-900/40 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <button id="roomBtn" title="Room chat" class="bg-black text-[13px] border border-red-900/50 w-9 h-9 rounded text-red-500 outline-none cursor-pointer">☰</button>
-            <div id="statusPulse" class="w-10 h-10 rounded-full border-2 border-red-600 flex items-center justify-center text-red-600 font-bold animate-pulse">V</div>
-            <div>
-                <h1 class="text-lg font-bold tracking-widest gradient-text leading-none">VanGPT</h1>
-                <p class="text-[9px] text-gray-500 uppercase tracking-widest">Tuan Irvan · <span id="currentKeyName" class="text-red-500">Online</span></p>
-            </div>
-        </div>
-                <button id="suaraBtn" title="Suara balasan (TTS)" class="bg-black text-[13px] border border-red-900/50 w-9 h-9 rounded text-red-500 outline-none cursor-pointer">🔊</button>
+    <header class="glass flex items-center gap-1 px-2">
+        <button id="roomBtn" title="Room chat">☰</button>
+        <span id="roomJudul" class="flex-1 truncate">VanGPT</span>
+        <span id="currentKeyName" class="hidden">Online</span>
+        <button id="suaraBtn" title="Suara balasan (TTS)">🔊</button>
+        <button id="chatBaruBtn" title="Chat baru"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
     </header>
 
-        <div id="roomBar" class="glass border-b border-red-900/30 px-4 py-2 flex items-center gap-2">
-        <span id="roomJudul" class="flex-1 text-[11px] tracking-widest text-gray-300 truncate">💬 ROOM 1</span>
-        <button id="bersihRoom" title="Hapus isi chat ini" class="text-[11px] text-gray-400 border border-gray-800 rounded px-2 py-1">Hapus Chat</button>
-    </div>
     <div id="incogBanner" class="hidden bg-amber-950/60 border-b border-amber-700/50 text-amber-300 text-[11px] px-4 py-2 tracking-wide">Mode Incognito — chat ini TIDAK disimpan. Keluar room / refresh = hilang selamanya.</div>
 <div id="chatBox" class="flex-1 overflow-y-auto p-4 space-y-4">
         <div>
@@ -187,27 +215,42 @@
         </div>
     </div>
 
-    <div class="p-4 glass border-t border-red-900/40">
+    <div id="bungkusBawah" class="glass border-t px-4">
         <div id="ollamaSettings" class="hidden mb-3 flex gap-2">
             <input type="text" id="ollamaUrl" value="http://localhost:11434" class="flex-1 bg-black border border-gray-800 p-2 rounded text-[10px] text-red-500 outline-none">
         </div>
-        
-                <div id="gambarChip" class="hidden mb-3 flex items-center gap-3 bg-black/60 border border-red-900/40 rounded-xl p-2">
+
+                <div id="gambarChip" class="hidden mb-3 flex items-center gap-3 border border-white/5 rounded-2xl p-2" style="background:#1d1e23">
             <img id="gambarThumb" class="w-11 h-11 object-cover rounded-lg" alt="lampiran">
-            <span class="flex-1 text-[10px] text-gray-400">Gambar terlampir — paling pas dibaca model DeepSeek / Nemotron.</span>
+            <div class="flex-1" style="min-width:0">
+                <span id="lampiranNama" class="block text-[11px] text-gray-200 truncate">Gambar terlampir</span>
+                <span id="lampiranInfo" class="block text-[10px] text-gray-500">Siap dikirim ke AI.</span>
+            </div>
             <button id="gambarBatal" class="text-gray-400 px-2">✕</button>
         </div>
-<div class="flex gap-3 bg-black/50 p-2 rounded-2xl border border-white/5 focus-within:border-red-600 transition-all">
-            <button id="lampiranBtn" title="Lampirkan gambar" class="bg-black border border-gray-800 text-gray-300 w-12 h-12 rounded-xl flex items-center justify-center">📎</button>
-            <textarea id="userInput" rows="1" placeholder="Tulis pesan..." class="flex-1 bg-transparent p-2 text-sm outline-none resize-none" style="min-height: 44px;"></textarea>
-            <button id="micBtn" title="Perintah suara" class="bg-black border border-gray-800 text-gray-300 w-12 h-12 rounded-xl flex items-center justify-center">🎤</button>
-            <button id="sendBtn" class="bg-red-800 hover:bg-red-600 text-white w-12 h-12 rounded-xl flex items-center justify-center transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
-            </button>
+        <div class="komposer">
+            <textarea id="userInput" rows="1" placeholder="Tulis pesan..."></textarea>
+            <div class="komposer-bawah">
+                <button id="lampiranBtn" title="Lampirkan file / gambar" class="tombol-pil">+</button>
+                <button id="pikirBtn" title="Mode berpikir: AI menalar dulu di panel khusus" class="pil-pikir aktif">🧠 Pikir</button>
+                <div class="flex-1"></div>
+                <button id="micBtn" title="Perintah suara" class="tombol-pil" style="font-size:17px">🎤</button>
+                <button id="sendBtn" title="Kirim"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V6"/><path d="M5.5 11.5L12 5l6.5 6.5"/></svg></button>
+            </div>
         </div>
     </div>
 
-    <input type="file" id="fileGambar" accept="image/*" class="hidden">
+    <input type="file" id="fileGambar" accept="*/*" class="hidden">
+
+    <div id="menuLatar" class="hidden"></div>
+    <div id="menuKonteks" class="hidden"></div>
+    <div id="previewOverlay" class="hidden">
+        <div class="pv-head">
+            <span class="flex-1 text-sm font-semibold text-gray-200">Pratinjau HTML</span>
+            <button id="previewTutup" class="kk-salin">Tutup ✕</button>
+        </div>
+        <iframe id="previewFrame" sandbox="allow-scripts allow-modals allow-forms" title="Pratinjau hasil HTML"></iframe>
+    </div>
 
 
     <script>
@@ -313,7 +356,8 @@
                     const nl = seg.indexOf('\n');
                     if (nl >= 0) { const awal = seg.slice(0, nl).trim(); if (/^[a-zA-Z0-9#+.-]{1,20}$/.test(awal)) { lang = awal; kode = seg.slice(nl + 1); } }
                     kode = kode.replace(/^\n+/, '').replace(/\n+$/, '');
-                    html += '<div class="kotak-kode"><div class="kk-head"><span>' + escHtml(lang || 'kode') + '</span><button type="button" class="kk-salin">Salin</button></div><pre><code>' + sorotKode(kode, lang) + '</code></pre></div>';
+                    const bisaPreview = /^(html|xml)$/i.test(lang);
+                    html += '<div class="kotak-kode"><div class="kk-head"><span>' + escHtml(lang || 'kode') + '</span><div class="kk-aksi">' + (bisaPreview ? '<button type="button" class="kk-salin kk-preview">▶ Pratinjau</button>' : '') + '<button type="button" class="kk-salin">Salin</button></div></div><pre><code>' + sorotKode(kode, lang) + '</code></pre></div>';
                 } else {
                     html += mdTeks(seg);
                 }
@@ -336,21 +380,28 @@
             if (tombol) { const asal = tombol.innerText; tombol.innerText = ok ? 'Tersalin ✓' : 'Gagal'; setTimeout(() => { tombol.innerText = asal; }, 1400); }
         }
 
-        function appendMessage(role, text, gambar, idx) {
+        // Pisahkan blok <think>...</think> (penalaran model) dari jawaban akhir.
+        function pisahPikir(teks) {
+            const s = String(teks == null ? '' : teks);
+            const m = s.match(/<think>([\s\S]*?)<\/think>/i) || s.match(/<thinking>([\s\S]*?)<\/thinking>/i);
+            if (!m) return { pikir: '', jawab: s };
+            return { pikir: m[1].trim(), jawab: s.replace(m[0], '').trim() };
+        }
+
+        function appendMessage(role, text, gambar, idx, berkas) {
             const div = document.createElement('div');
             const imgHtml = gambar ? `<img src="${gambar}" class="pesan-gambar" alt="gambar terlampir">` : '';
-            const punyaIdx = typeof idx === 'number' && idx >= 0;
-            let aksi = '';
-            if (punyaIdx) {
-                aksi = '<div class="aksi-pesan">' + (role === 'user' ? `<button type="button" data-aksi="edit" data-idx="${idx}">✎ Edit</button>` : '') + `<button type="button" data-aksi="salin" data-idx="${idx}">⧉ Salin</button></div>`;
-            }
+            if (typeof idx === 'number' && idx >= 0) { div.dataset.idx = idx; div.dataset.role = role; }
             if (role === 'user') {
                 div.className = 'baris-user';
-                div.innerHTML = `<div style="display:flex;flex-direction:column;align-items:flex-end;max-width:88%">${imgHtml}<div class="gelembung-user"></div>${aksi}</div>`;
+                const chipHtml = berkas ? `<div class="chip-berkas">📎 ${escHtml(berkas)}</div>` : '';
+                div.innerHTML = `<div style="display:flex;flex-direction:column;align-items:flex-end;max-width:88%">${imgHtml}${chipHtml}<div class="gelembung-user"></div></div>`;
                 div.querySelector('.gelembung-user').innerText = text;
             } else {
                 div.className = 'baris-ai';
-                div.innerHTML = `<p class="label-ai">VanGPT</p>${imgHtml}<div class="isi-pesan">${renderMD(text)}</div>${aksi}`;
+                const pisah = pisahPikir(text);
+                const panelPikir = pisah.pikir ? `<details class="panel-pikir"><summary>🧠 Proses berpikir</summary><div class="isi-pikir">${renderMD(pisah.pikir)}</div></details>` : '';
+                div.innerHTML = `<p class="label-ai">VanGPT</p>${imgHtml}${panelPikir}<div class="isi-pesan">${renderMD(pisah.jawab)}</div>`;
             }
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -497,6 +548,8 @@
         const incogBanner = document.getElementById('incogBanner');
         const gambarChip = document.getElementById('gambarChip');
         const gambarThumb = document.getElementById('gambarThumb');
+        const lampiranNama = document.getElementById('lampiranNama');
+        const lampiranInfo = document.getElementById('lampiranInfo');
         const fileGambar = document.getElementById('fileGambar');
         const suaraBtn = document.getElementById('suaraBtn');
         let rooms = [];
@@ -504,6 +557,7 @@
         let modeIncog = false;
         let pesanIncog = [];
         let draftGambar = null;
+        let draftBerkas = null; // { nama, isi } — file teks/kode yang dilampirkan
 
         const SAPAAN_HTML = `<div><p class="label-ai">VanGPT</p><div class="isi-pesan"><p class="md-p">Halo, Tuan Irvan. Mau dibantu apa hari ini?</p></div></div>`;
 
@@ -543,15 +597,15 @@
             const daftar = pesanAktif();
             document.body.classList.toggle('incognito', modeIncog);
             incogBanner.classList.toggle('hidden', !modeIncog);
-            roomJudul.innerText = modeIncog ? 'INCOGNITO — TIDAK DISIMPAN' : roomAktif().nama.toUpperCase();
+            roomJudul.innerText = modeIncog ? 'Incognito — tidak disimpan' : roomAktif().nama;
             if (!daftar.length) { chatBox.innerHTML = SAPAAN_HTML; return; }
-            daftar.forEach((m, i) => appendMessage(m.r === 'u' ? 'user' : 'ai', m.t, m.g || null, i));
+            daftar.forEach((m, i) => appendMessage(m.r === 'u' ? 'user' : 'ai', m.t, m.g || null, i, m.f || null));
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        function tambahPesan(role, text, gambar) {
+        function tambahPesan(role, text, gambar, berkasNama) {
             const daftar = pesanAktif();
-            daftar.push({ r: role === 'user' ? 'u' : 'a', t: text, g: gambar || undefined });
+            daftar.push({ r: role === 'user' ? 'u' : 'a', t: text, g: gambar || undefined, f: berkasNama || undefined });
             if (!modeIncog) {
                 const r = roomAktif();
                 if (role === 'user' && r.pesan.filter(m => m.r === 'u').length === 1) {
@@ -607,45 +661,82 @@
             tampilkanPesan();
         });
 
-        // ---- Lampiran gambar (dikompres maksimal 768px sebelum dikirim/disimpan) ----
+        // ---- Lampiran: gambar (vision, dikompres maks 768px) ATAU file teks/kode (isinya dibaca AI) ----
+        function tampilChipLampiran() {
+            if (draftGambar) {
+                gambarThumb.style.display = '';
+                gambarThumb.src = draftGambar;
+                lampiranNama.innerText = 'Gambar terlampir';
+                lampiranInfo.innerText = 'Dibaca AI sebagai gambar (vision).';
+                gambarChip.classList.remove('hidden');
+            } else if (draftBerkas) {
+                gambarThumb.style.display = 'none';
+                lampiranNama.innerText = '📎 ' + draftBerkas.nama;
+                lampiranInfo.innerText = 'Isi file (' + Math.max(1, Math.round(draftBerkas.isi.length / 1024)) + ' KB teks) akan dibaca AI.';
+                gambarChip.classList.remove('hidden');
+            } else {
+                gambarChip.classList.add('hidden');
+            }
+        }
         document.getElementById('lampiranBtn').addEventListener('click', () => fileGambar.click());
-        fileGambar.addEventListener('change', () => {
+        fileGambar.addEventListener('change', async () => {
             const f = fileGambar.files && fileGambar.files[0];
             fileGambar.value = '';
             if (!f) return;
-            const url = URL.createObjectURL(f);
-            const img = new Image();
-            img.onload = () => {
-                try {
-                    const skala = Math.min(1, 768 / Math.max(img.width, img.height));
-                    const cv = document.createElement('canvas');
-                    cv.width = Math.round(img.width * skala); cv.height = Math.round(img.height * skala);
-                    cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
-                    draftGambar = cv.toDataURL('image/jpeg', 0.82);
-                    gambarThumb.src = draftGambar;
-                    gambarChip.classList.remove('hidden');
-                } catch (e) { appendMessage('ai', '⚠ Gambar gagal diproses di perangkat ini.'); }
-                URL.revokeObjectURL(url);
-            };
-            img.onerror = () => { URL.revokeObjectURL(url); appendMessage('ai', '⚠ File itu bukan gambar yang bisa dibaca.'); };
-            img.src = url;
+            if (f.type.startsWith('image/')) {
+                const url = URL.createObjectURL(f);
+                const img = new Image();
+                img.onload = () => {
+                    try {
+                        const skala = Math.min(1, 768 / Math.max(img.width, img.height));
+                        const cv = document.createElement('canvas');
+                        cv.width = Math.round(img.width * skala); cv.height = Math.round(img.height * skala);
+                        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+                        draftGambar = cv.toDataURL('image/jpeg', 0.82);
+                        draftBerkas = null;
+                        tampilChipLampiran();
+                    } catch (e) { appendMessage('ai', '⚠ Gambar gagal diproses di perangkat ini.'); }
+                    URL.revokeObjectURL(url);
+                };
+                img.onerror = () => { URL.revokeObjectURL(url); appendMessage('ai', '⚠ File itu bukan gambar yang bisa dibaca.'); };
+                img.src = url;
+                return;
+            }
+            const ekstensiTeks = /\.(txt|md|json|js|ts|jsx|tsx|html?|css|csv|xml|log|py|java|php|sh|yml|yaml|ini|sql|kt|dart|vue|c|cpp|h|rb|go|rs)$/i.test(f.name);
+            if (!ekstensiTeks && !f.type.startsWith('text/') && f.type !== 'application/json') {
+                appendMessage('ai', '⚠ Format file "' + f.name + '" belum bisa dibaca AI. Yang bisa: gambar, atau file teks/kode (.txt .md .json .js .html .css .csv .py, dll).');
+                return;
+            }
+            if (f.size > 400 * 1024) { appendMessage('ai', '⚠ File terlalu besar (maks 400 KB untuk lampiran teks).'); return; }
+            try {
+                const isi = await f.text();
+                draftBerkas = { nama: f.name, isi: isi.slice(0, 20000) };
+                draftGambar = null;
+                tampilChipLampiran();
+            } catch (e) { appendMessage('ai', '⚠ File gagal dibaca di perangkat ini.'); }
         });
-        document.getElementById('gambarBatal').addEventListener('click', () => { draftGambar = null; gambarChip.classList.add('hidden'); });
+        document.getElementById('gambarBatal').addEventListener('click', () => { draftGambar = null; draftBerkas = null; tampilChipLampiran(); });
 
         // ---- Suara: masukan (STT) ----
         const micBtn = document.getElementById('micBtn');
         let rekaman = null;
         micBtn.addEventListener('click', () => {
             const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SR) { appendMessage('ai', '🎤 Perangkat ini tidak menyediakan input suara untuk WebView. Coba keyboard suara (Gboard) sebagai gantinya, Tuan.'); return; }
+            if (!SR) { appendMessage('ai', '🎤 Input suara tidak tersedia di perangkat ini. Pakai tombol mic di keyboard (Gboard) — hasil ucapannya masuk ke kotak pesan juga, Tuan.'); return; }
             if (rekaman) { try { rekaman.stop(); } catch (e) {} return; }
             rekaman = new SR();
             rekaman.lang = 'id-ID';
             rekaman.interimResults = false;
             micBtn.classList.add('merekam');
-            rekaman.onresult = (ev) => { try { userInput.value = ev.results[0][0].transcript; } catch (e) {} };
+            rekaman.onresult = (ev) => { try { userInput.value = ev.results[0][0].transcript; userInput.dispatchEvent(new Event('input')); } catch (e) {} };
             rekaman.onend = () => { micBtn.classList.remove('merekam'); rekaman = null; userInput.focus(); };
-            rekaman.onerror = () => { micBtn.classList.remove('merekam'); rekaman = null; };
+            rekaman.onerror = (ev) => {
+                micBtn.classList.remove('merekam'); rekaman = null;
+                const err = ev && ev.error;
+                if (err === 'not-allowed' || err === 'service-not-allowed') appendMessage('ai', '🎤 Izin mikrofon belum diberikan. Di aplikasi: Pengaturan HP → Aplikasi → VanGPT → Izin → Mikrofon → Izinkan. Di browser: ketuk ikon gembok di alamat → Izin situs → Mikrofon → Izinkan.');
+                else if (err === 'network') appendMessage('ai', '🎤 Layanan suara tidak terjangkau — fitur ini memakai layanan Google di HP dan butuh internet. Coba lagi, atau pakai mic di keyboard (Gboard).');
+                else if (err && err !== 'aborted' && err !== 'no-speech') appendMessage('ai', '🎤 Suara gagal (' + err + '). Coba lagi, Tuan.');
+            };
             try { rekaman.start(); } catch (e) { micBtn.classList.remove('merekam'); rekaman = null; }
         });
 
@@ -673,34 +764,49 @@
 
         // ---- Kirim (room-aware, memori per room ikut terkirim) ----
         let sedangKirim = false;
-        async function prosesKirim(teksKirim, gambar) {
+        async function prosesKirim(teksKirim, gambar, berkas) {
             if (sedangKirim) return;
             sedangKirim = true;
             try {
-                const riwayat = pesanAktif().map(m => ({ role: m.r === 'u' ? 'user' : 'assistant', text: m.g ? (m.t + ' [dengan gambar terlampir]') : m.t }));
-                tambahPesan('user', teksKirim, gambar);
-                appendMessage('user', teksKirim, gambar, pesanAktif().length - 1);
+                const riwayat = pesanAktif().map(m => ({ role: m.r === 'u' ? 'user' : 'assistant', text: m.g ? (m.t + ' [dengan gambar terlampir]') : (m.f ? (m.t + ' [dengan file terlampir: ' + m.f + ']') : m.t) }));
+                tambahPesan('user', teksKirim, gambar, berkas ? berkas.nama : null);
+                appendMessage('user', teksKirim, gambar, pesanAktif().length - 1, berkas ? berkas.nama : null);
                 const loadDiv = appendMessage('ai', '', null, -1);
-                loadDiv.querySelector('.isi-pesan').innerHTML = '<span class="titik"><i></i><i></i><i></i></span>';
-                const result = await callWf(teksKirim, riwayat, gambar);
+                loadDiv.querySelector('.isi-pesan').innerHTML = '<span class="berpikir"><span class="titik"><i></i><i></i><i></i></span><span>Berpikir… <span class="waktu-pikir">0 dtk</span></span></span>';
+                const t0 = Date.now();
+                const jarum = setInterval(() => { const el = loadDiv.querySelector('.waktu-pikir'); if (el) el.textContent = Math.round((Date.now() - t0) / 1000) + ' dtk'; }, 500);
+                let promptKirim = teksKirim;
+                if (berkas) promptKirim = '📎 File terlampir: ' + berkas.nama + '\n```\n' + berkas.isi + '\n```\n\n' + teksKirim;
+                if (pikirAktif()) promptKirim += '\n\n(Catatan: pikirkan jawabanmu langkah demi langkah di dalam tag <think>...</think> terlebih dahulu, lalu tulis jawaban akhir yang rapi di luar tag itu.)';
+                const result = await callWf(promptKirim, riwayat, gambar);
+                clearInterval(jarum);
                 tambahPesan('ai', result, null);
                 tampilkanPesan();
-                ucapkan(result);
+                ucapkan(pisahPikir(result).jawab);
             } finally { sedangKirim = false; }
         }
 
         sendBtn.addEventListener('click', () => {
             const text = userInput.value.trim();
-            if (!text && !draftGambar) return;
+            if (!text && !draftGambar && !draftBerkas) return;
             const gambar = draftGambar;
-            const teksKirim = text || '(lihat gambar ini)';
+            const berkas = draftBerkas;
+            const teksKirim = text || (gambar ? '(lihat gambar ini)' : '(lihat file terlampir ini)');
             userInput.value = '';
-            draftGambar = null; gambarChip.classList.add('hidden');
-            prosesKirim(teksKirim, gambar);
+            userInput.style.height = 'auto';
+            draftGambar = null; draftBerkas = null; tampilChipLampiran();
+            prosesKirim(teksKirim, gambar, berkas);
         });
 
-        // ---- Aksi per pesan: salin kode, salin pesan, edit & kirim ulang ----
+        // ---- Klik di area chat: salin kode & pratinjau HTML ----
         chatBox.addEventListener('click', (e) => {
+            const btnPv = e.target.closest('.kk-preview');
+            if (btnPv) {
+                const kotak = btnPv.closest('.kotak-kode');
+                const kode = kotak ? kotak.querySelector('code') : null;
+                if (kode) bukaPreview(kode.innerText);
+                return;
+            }
             const btnKode = e.target.closest('.kk-salin');
             if (btnKode) {
                 const kotak = btnKode.closest('.kotak-kode');
@@ -708,25 +814,76 @@
                 if (kode) salinTeks(kode.innerText, btnKode);
                 return;
             }
-            const btn = e.target.closest('[data-aksi]');
-            if (!btn) return;
-            const idx = parseInt(btn.getAttribute('data-idx'), 10);
-            const daftar = pesanAktif();
-            if (isNaN(idx) || !daftar[idx]) return;
-            if (btn.getAttribute('data-aksi') === 'salin') { salinTeks(daftar[idx].t, btn); return; }
-            if (btn.getAttribute('data-aksi') === 'edit') mulaiEdit(idx, btn);
         });
 
-        function mulaiEdit(idx, tombol) {
+        // ---- Pratinjau HTML: render kode HTML dalam iframe layar penuh ----
+        const previewOverlay = document.getElementById('previewOverlay');
+        const previewFrame = document.getElementById('previewFrame');
+        function bukaPreview(kodeHtml) { previewFrame.srcdoc = kodeHtml; previewOverlay.classList.remove('hidden'); }
+        document.getElementById('previewTutup').addEventListener('click', () => { previewOverlay.classList.add('hidden'); previewFrame.srcdoc = ''; });
+
+        // ---- Menu tekan-tahan pada pesan: Edit (pesan sendiri) & Salin ----
+        const menuKonteks = document.getElementById('menuKonteks');
+        const menuLatar = document.getElementById('menuLatar');
+        let menuIdx = -1, menuRole = '';
+        function tutupMenu() { menuKonteks.classList.add('hidden'); menuLatar.classList.add('hidden'); document.querySelectorAll('.tekan-aktif').forEach(el => el.classList.remove('tekan-aktif')); }
+        menuLatar.addEventListener('click', tutupMenu);
+        function tampilMenuKonteks(idx, role, x, y) {
+            menuIdx = idx; menuRole = role;
+            menuKonteks.innerHTML = (role === 'user' ? '<button type="button" data-menu="edit">✎&ensp;Edit & kirim ulang</button>' : '') + '<button type="button" data-menu="salin">⧉&ensp;Salin pesan</button>';
+            menuKonteks.classList.remove('hidden');
+            menuLatar.classList.remove('hidden');
+            const lebar = 190, tinggi = role === 'user' ? 116 : 66;
+            menuKonteks.style.left = Math.max(8, Math.min(x, window.innerWidth - lebar - 8)) + 'px';
+            menuKonteks.style.top = Math.max(8, Math.min(y, window.innerHeight - tinggi - 8)) + 'px';
+            if (window.navigator && navigator.vibrate) { try { navigator.vibrate(15); } catch (e) {} }
+        }
+        menuKonteks.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-menu]');
+            if (!btn) return;
+            const daftar = pesanAktif();
+            const m = daftar[menuIdx];
+            if (btn.getAttribute('data-menu') === 'salin') {
+                if (m) salinTeks(pisahPikir(m.t).jawab || m.t, btn);
+                setTimeout(tutupMenu, 650);
+            } else if (btn.getAttribute('data-menu') === 'edit') {
+                tutupMenu();
+                mulaiEdit(menuIdx);
+            }
+        });
+        let timerTekan = null, tekanX = 0, tekanY = 0;
+        function batalTekan() { if (timerTekan) { clearTimeout(timerTekan); timerTekan = null; } }
+        chatBox.addEventListener('pointerdown', (e) => {
+            if (e.target.closest('button, a, textarea, summary, details')) return;
+            const baris = e.target.closest('[data-idx]');
+            if (!baris) return;
+            tekanX = e.clientX; tekanY = e.clientY;
+            batalTekan();
+            timerTekan = setTimeout(() => {
+                baris.classList.add('tekan-aktif');
+                tampilMenuKonteks(parseInt(baris.dataset.idx, 10), baris.dataset.role, tekanX, tekanY);
+            }, 480);
+        });
+        chatBox.addEventListener('pointermove', (e) => { if (timerTekan && (Math.abs(e.clientX - tekanX) > 12 || Math.abs(e.clientY - tekanY) > 12)) batalTekan(); });
+        chatBox.addEventListener('pointerup', batalTekan);
+        chatBox.addEventListener('pointercancel', batalTekan);
+        chatBox.addEventListener('scroll', () => { batalTekan(); if (!menuKonteks.classList.contains('hidden')) tutupMenu(); });
+        chatBox.addEventListener('contextmenu', (e) => {
+            const baris = e.target.closest('[data-idx]');
+            if (!baris) return;
+            e.preventDefault();
+            tampilMenuKonteks(parseInt(baris.dataset.idx, 10), baris.dataset.role, e.clientX, e.clientY);
+        });
+
+        function mulaiEdit(idx) {
             if (sedangKirim) return;
             const daftar = pesanAktif();
             const m = daftar[idx];
             if (!m || m.r !== 'u') return;
-            const baris = tombol.closest('.baris-user');
+            const baris = chatBox.querySelector('[data-idx="' + idx + '"]');
             if (!baris) return;
             const gelembung = baris.querySelector('.gelembung-user');
-            const aksiRow = baris.querySelector('.aksi-pesan');
-            if (aksiRow) aksiRow.style.display = 'none';
+            if (!gelembung) return;
             const wadah = document.createElement('div');
             wadah.innerHTML = '<textarea class="area-edit" rows="3"></textarea><div class="tombol-edit"><button type="button" class="te-kirim">Kirim Ulang</button><button type="button" class="te-batal">Batal</button></div>';
             const ta = wadah.querySelector('textarea');
@@ -743,13 +900,32 @@
                 d.length = idx; // buang pesan ini & semua sesudahnya — percakapan mulai ulang dari titik ini
                 if (!modeIncog) { simpanRooms(); renderRoomList(); }
                 tampilkanPesan();
-                prosesKirim(baru, g || null);
+                prosesKirim(baru, g || null, null);
             });
         }
+
+        // ---- Mode berpikir (panel penalaran ala model reasoning) ----
+        const pikirBtn = document.getElementById('pikirBtn');
+        function pikirAktif() { try { return localStorage.getItem('vangpt_pikir') !== '0'; } catch (e) { return true; } }
+        function segarkanPikirBtn() { pikirBtn.classList.toggle('aktif', pikirAktif()); }
+        pikirBtn.addEventListener('click', () => {
+            try { localStorage.setItem('vangpt_pikir', pikirAktif() ? '0' : '1'); } catch (e) {}
+            segarkanPikirBtn();
+        });
+
+        // ---- Tombol chat baru di bar atas = buat room baru langsung ----
+        document.getElementById('chatBaruBtn').addEventListener('click', () => document.getElementById('roomBaru').click());
+
+        // ---- Kotak ketik membesar mengikuti isi (gaya komposer modern) ----
+        userInput.addEventListener('input', () => {
+            userInput.style.height = 'auto';
+            userInput.style.height = Math.min(userInput.scrollHeight, 150) + 'px';
+        });
 
         // ---- Init V2 ----
         muatRooms();
         segarkanSuaraBtn();
+        segarkanPikirBtn();
         tampilkanPesan();
         renderRoomList();
 
