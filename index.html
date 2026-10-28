@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VanGPT ⟡ Auto-Switch Edition</title>
+    <title>VanGPT</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
         body { font-family: 'Space+Grotesk', sans-serif; background-color: #050505; color: #e0e0e0; }
@@ -84,19 +84,83 @@
         .hover\:bg-red-600:hover { background-color: #dc2626; }
         .hover\:text-red-400:hover { color: #f87171; }
         .focus-within\:border-red-600:focus-within { border-color: #dc2626; }
+
+        /* ===== TEMA PROFESIONAL V3 — netral, bersih, ala aplikasi AI modern ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; background-color: #0f1013; color: #ececf1; }
+        .glass { background: #17181d; backdrop-filter: none; border-color: rgba(255,255,255,.08); }
+        .gradient-text { background: none; -webkit-text-fill-color: #f5f5f7; color: #f5f5f7; }
+        .red-shadow { box-shadow: 0 1px 2px rgba(0,0,0,.4); }
+        .border-red-900\/30, .border-red-900\/40, .border-red-900\/50 { border-color: rgba(255,255,255,.08); }
+        .border-red-600 { border-color: #4d6bfe; }
+        .text-red-500 { color: #9db1ff; } .text-red-600 { color: #9db1ff; }
+        .hover\:text-red-400:hover { color: #c3cfff; }
+        .bg-red-800 { background-color: #4d6bfe; }
+        .hover\:bg-red-600:hover { background-color: #6380ff; }
+        .focus-within\:border-red-600:focus-within { border-color: #4d6bfe; }
+        .bg-red-950\/40 { background-color: #26272e; }
+        .room-item { border-color: rgba(255,255,255,.07); background: rgba(255,255,255,.03); border-radius: .65rem; }
+        .room-item.aktif { border-color: rgba(77,107,254,.6); background: rgba(77,107,254,.14); }
+        body.incognito #chatBox { box-shadow: inset 0 0 0 2px rgba(255,170,0,.18); }
+        header.glass, #roomBar.glass { background: rgba(23,24,29,.92); }
+        #chatBox { scrollbar-width: thin; }
+
+        /* ===== Pesan ala aplikasi AI modern ===== */
+        .baris-user { display: flex; justify-content: flex-end; }
+        .gelembung-user { background: #26272e; color: #f3f4f6; padding: .65rem .95rem; border-radius: 1.15rem; max-width: 85%; font-size: 15px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; }
+        .baris-ai { display: block; }
+        .label-ai { font-size: 11px; font-weight: 600; letter-spacing: .04em; color: #9db1ff; margin-bottom: .3rem; }
+        .isi-pesan { font-size: 15px; line-height: 1.65; color: #e8e9ec; word-break: break-word; }
+        .isi-pesan .md-p { margin: 0 0 .6rem; }
+        .isi-pesan .md-p:last-child { margin-bottom: 0; }
+        .md-h { font-weight: 700; color: #fff; margin: .8rem 0 .4rem; line-height: 1.35; }
+        .md-h.pertama { margin-top: 0; }
+        .md-sub { font-weight: 700; font-size: 17px; color: #f5f5f7; margin: .8rem 0 .35rem; line-height: 1.35; }
+        .isi-pesan ul, .isi-pesan ol { margin: .2rem 0 .7rem; padding-left: 1.25rem; }
+        .isi-pesan li { margin: .18rem 0; }
+        .isi-pesan blockquote { border-left: 3px solid rgba(255,255,255,.18); padding-left: .8rem; color: #b9bcc4; margin: .4rem 0 .7rem; }
+        .isi-pesan hr { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: .9rem 0; }
+        .isi-pesan a { color: #8ea2ff; text-decoration: underline; }
+        .ikode { background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.07); padding: .05rem .35rem; border-radius: .35rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .86em; }
+        .kotak-kode { background: #0b0c0f; border: 1px solid rgba(255,255,255,.1); border-radius: .8rem; overflow: hidden; margin: .5rem 0 .8rem; }
+        .kk-head { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,.05); padding: .4rem .7rem; font-size: 11px; color: #9aa0ab; }
+        .kk-salin { font-size: 11px; font-weight: 600; color: #dfe3ea; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); padding: .28rem .65rem; border-radius: 9999px; cursor: pointer; }
+        .kk-salin:active { background: rgba(255,255,255,.16); }
+        .kotak-kode pre { margin: 0; padding: .8rem .9rem; overflow-x: auto; }
+        .kotak-kode code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px; line-height: 1.55; color: #e6e8ec; white-space: pre; }
+        .kotak-kode code .tk-tag { color: #ff7b72; }
+        .kotak-kode code .tk-str { color: #a5d6ff; }
+        .kotak-kode code .tk-komen { color: #8b949e; font-style: italic; }
+        .kotak-kode code .tk-num { color: #79c0ff; }
+        .kotak-kode code .tk-prop { color: #7ee0ff; }
+        .kotak-kode code .tk-kw { color: #d2a8ff; }
+        .kotak-kode code .tk-tanda { color: #9aa0ab; }
+        .aksi-pesan { display: flex; gap: .4rem; margin-top: .45rem; }
+        .aksi-pesan button { font-size: 11px; font-weight: 500; color: #9aa0ab; background: transparent; border: 1px solid rgba(255,255,255,.09); padding: .3rem .7rem; border-radius: 9999px; cursor: pointer; }
+        .aksi-pesan button:active { background: rgba(255,255,255,.08); color: #fff; }
+        .baris-user .aksi-pesan { justify-content: flex-end; }
+        .area-edit { width: 100%; min-width: 220px; background: #101114; color: #f3f4f6; border: 1px solid rgba(77,107,254,.55); border-radius: .8rem; padding: .6rem .7rem; font-size: 14px; line-height: 1.5; outline: none; resize: vertical; }
+        .tombol-edit { display: flex; gap: .4rem; margin-top: .5rem; }
+        .tombol-edit button { font-size: 12px; font-weight: 600; padding: .45rem .85rem; border-radius: 9999px; cursor: pointer; }
+        .te-kirim { background: #4d6bfe; color: #fff; }
+        .te-batal { background: transparent; color: #9aa0ab; border: 1px solid rgba(255,255,255,.12); }
+        .titik { display: inline-flex; gap: 5px; padding: .35rem 0; }
+        .titik i { width: 7px; height: 7px; border-radius: 50%; background: #8b8f98; display: block; animation: titikLompat 1.2s infinite; }
+        .titik i:nth-child(2) { animation-delay: .15s; } .titik i:nth-child(3) { animation-delay: .3s; }
+        @keyframes titikLompat { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-4px); opacity: 1; } }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
     <div id="drawerOverlay" class="hidden fixed inset-0 bg-black/70 z-40"></div>
     <aside id="drawer" class="fixed top-0 left-0 h-full w-[300px] max-w-[85vw] z-40 glass border-r border-red-900/40 p-4 flex flex-col gap-3 -translate-x-full">
         <div class="flex items-center justify-between">
-            <h2 class="text-xs font-bold tracking-widest text-red-500">💬 ROOM CHAT</h2>
+            <h2 class="text-xs font-bold tracking-widest text-red-500">ROOM CHAT</h2>
             <button id="drawerTutup" class="text-gray-400 text-lg leading-none">✕</button>
         </div>
-        <button id="roomBaru" class="bg-red-800 hover:bg-red-600 text-white text-xs font-bold p-3 rounded-xl">＋ ROOM BARU</button>
-        <button id="roomIncognito" class="bg-black border border-amber-700/60 text-amber-400 text-xs font-bold p-3 rounded-xl">🕵️ CHAT INCOGNITO — SEKALI PAKAI</button>
+        <button id="roomBaru" class="bg-red-800 hover:bg-red-600 text-white text-xs font-bold p-3 rounded-xl">+ Room Baru</button>
+        <button id="roomIncognito" class="bg-black border border-amber-700/60 text-amber-400 text-xs font-bold p-3 rounded-xl">Chat Incognito — Sekali Pakai</button>
         <div id="roomList" class="flex-1 overflow-y-auto flex flex-col gap-2"></div>
-        <button id="hapusSemuaRoom" class="text-[10px] text-gray-500 hover:text-red-400 tracking-widest">🗑 HAPUS SEMUA ROOM</button>
+        <button id="hapusSemuaRoom" class="text-[10px] text-gray-500 hover:text-red-400 tracking-widest">Hapus Semua Room</button>
     </aside>
 
     <header class="p-4 glass border-b border-red-900/40 flex justify-between items-center">
@@ -104,8 +168,8 @@
             <button id="roomBtn" title="Room chat" class="bg-black text-[13px] border border-red-900/50 w-9 h-9 rounded text-red-500 outline-none cursor-pointer">☰</button>
             <div id="statusPulse" class="w-10 h-10 rounded-full border-2 border-red-600 flex items-center justify-center text-red-600 font-bold animate-pulse">V</div>
             <div>
-                <h1 class="text-lg font-bold tracking-widest gradient-text leading-none">VanGPT 2.0</h1>
-                <p class="text-[9px] text-gray-500 uppercase tracking-widest">Master: Tuan Irvan ⟡ <span id="currentKeyName" class="text-red-500">Online</span></p>
+                <h1 class="text-lg font-bold tracking-widest gradient-text leading-none">VanGPT</h1>
+                <p class="text-[9px] text-gray-500 uppercase tracking-widest">Tuan Irvan · <span id="currentKeyName" class="text-red-500">Online</span></p>
             </div>
         </div>
                 <button id="suaraBtn" title="Suara balasan (TTS)" class="bg-black text-[13px] border border-red-900/50 w-9 h-9 rounded text-red-500 outline-none cursor-pointer">🔊</button>
@@ -113,13 +177,13 @@
 
         <div id="roomBar" class="glass border-b border-red-900/30 px-4 py-2 flex items-center gap-2">
         <span id="roomJudul" class="flex-1 text-[11px] tracking-widest text-gray-300 truncate">💬 ROOM 1</span>
-        <button id="bersihRoom" title="Hapus isi chat ini" class="text-[11px] text-gray-400 border border-gray-800 rounded px-2 py-1">🧹 HAPUS CHAT</button>
+        <button id="bersihRoom" title="Hapus isi chat ini" class="text-[11px] text-gray-400 border border-gray-800 rounded px-2 py-1">Hapus Chat</button>
     </div>
-    <div id="incogBanner" class="hidden bg-amber-950/60 border-b border-amber-700/50 text-amber-300 text-[11px] px-4 py-2 tracking-wide">🕵️ MODE INCOGNITO — chat ini TIDAK disimpan. Keluar room / refresh = hilang selamanya.</div>
+    <div id="incogBanner" class="hidden bg-amber-950/60 border-b border-amber-700/50 text-amber-300 text-[11px] px-4 py-2 tracking-wide">Mode Incognito — chat ini TIDAK disimpan. Keluar room / refresh = hilang selamanya.</div>
 <div id="chatBox" class="flex-1 overflow-y-auto p-4 space-y-4">
-        <div class="glass p-4 rounded-2xl max-w-[90%] border-l-4 border-red-600 red-shadow">
-            <p class="text-[10px] text-red-600 font-black mb-1">SYSTEM NOTIFICATION</p>
-            <p class="text-sm italic leading-relaxed text-gray-300">"Kunci telah terbuka, Tuan Irvan. Sistem Auto-Rotate aktif. Gunakan kekuatan ini sesukamu. 💀🔥"</p>
+        <div>
+            <p class="label-ai">VanGPT</p>
+            <p class="text-sm leading-relaxed text-gray-300">Halo, Tuan Irvan. Mau dibantu apa hari ini?</p>
         </div>
     </div>
 
@@ -135,7 +199,7 @@
         </div>
 <div class="flex gap-3 bg-black/50 p-2 rounded-2xl border border-white/5 focus-within:border-red-600 transition-all">
             <button id="lampiranBtn" title="Lampirkan gambar" class="bg-black border border-gray-800 text-gray-300 w-12 h-12 rounded-xl flex items-center justify-center">📎</button>
-            <textarea id="userInput" rows="1" placeholder="Masukkan perintah..." class="flex-1 bg-transparent p-2 text-sm outline-none resize-none" style="min-height: 44px;"></textarea>
+            <textarea id="userInput" rows="1" placeholder="Tulis pesan..." class="flex-1 bg-transparent p-2 text-sm outline-none resize-none" style="min-height: 44px;"></textarea>
             <button id="micBtn" title="Perintah suara" class="bg-black border border-gray-800 text-gray-300 w-12 h-12 rounded-xl flex items-center justify-center">🎤</button>
             <button id="sendBtn" class="bg-red-800 hover:bg-red-600 text-white w-12 h-12 rounded-xl flex items-center justify-center transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
@@ -169,13 +233,125 @@
             return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
         }
 
-        function appendMessage(role, text, gambar) {
+        function escHtml(s) {
+            return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // ---- Renderer markdown ringan: **tebal**, judul, daftar, kutip, `kode`, dan blok kode ``` dalam kotak + tombol salin ----
+        function mdInline(s) {
+            const potongan = s.split(/`([^`\n]+)`/);
+            return potongan.map((p, i) => {
+                if (i % 2 === 1) return '<code class="ikode">' + p + '</code>';
+                return p
+                    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+                    .replace(/(^|[^*\w])\*([^*\n]+)\*/g, '$1<em>$2</em>')
+                    .replace(/\[([^\]\n]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+            }).join('');
+        }
+
+        function mdTeks(seg) {
+            const baris = escHtml(seg).split('\n');
+            let html = '', modeList = null; const para = [];
+            const tutupPara = () => { if (para.length) { html += '<p class="md-p">' + para.map(mdInline).join('<br>') + '</p>'; para.length = 0; } };
+            const tutupList = () => { if (modeList) { html += modeList === 'ul' ? '</ul>' : '</ol>'; modeList = null; } };
+            for (const mentah of baris) {
+                const b = mentah.replace(/\s+$/, '');
+                const trim = b.trim();
+                if (!trim) { tutupPara(); tutupList(); continue; }
+                const h = trim.match(/^(#{1,4})\s+(.*)$/);
+                if (h) { tutupPara(); tutupList(); html += '<div class="md-h" style="font-size:' + (h[1].length <= 2 ? '19px' : '16px') + '">' + mdInline(h[2]) + '</div>'; continue; }
+                if (/^\*\*[^*]+\*\*$/.test(trim) && trim.length <= 90) { tutupPara(); tutupList(); html += '<div class="md-sub">' + mdInline(trim) + '</div>'; continue; }
+                if (/^(-{3,}|\*{3,}|_{3,})$/.test(trim)) { tutupPara(); tutupList(); html += '<hr>'; continue; }
+                if (/^&gt;\s?/.test(trim)) { tutupPara(); tutupList(); html += '<blockquote>' + mdInline(trim.replace(/^&gt;\s?/, '')) + '</blockquote>'; continue; }
+                const ul = trim.match(/^[-*•]\s+(.*)$/);
+                const ol = trim.match(/^\d{1,3}[.)]\s+(.*)$/);
+                if (ul || ol) {
+                    tutupPara();
+                    const jenis = ul ? 'ul' : 'ol';
+                    if (modeList !== jenis) { tutupList(); html += '<' + jenis + '>'; modeList = jenis; }
+                    html += '<li>' + mdInline((ul || ol)[1]) + '</li>';
+                    continue;
+                }
+                tutupList();
+                para.push(b);
+            }
+            tutupPara(); tutupList();
+            return html;
+        }
+
+        // Pewarna sintaks ringan & aman: token dibaca dari kode MENTAH, tiap token di-escape sebelum dibungkus span.
+        function sorotKode(kode, lang) {
+            const L = String(lang || '').toLowerCase();
+            if (!/^(html|xml|css|js|javascript|jsx|ts|typescript|json|php)$/.test(L)) return escHtml(kode);
+            const pola = /(\/\*[\s\S]*?\*\/)|(\/\/[^\n]*)|(<!--[\s\S]*?-->)|("(?:[^"\\\n]|\\.)*")|('(?:[^'\\\n]|\\.)*')|(`(?:[^`\\]|\\.)*`)|(<\/?[a-zA-Z][a-zA-Z0-9-]*)|(\b\d+(?:\.\d+)?(?:px|rem|em|%|vh|vw|ms|s)?\b)|([a-zA-Z-]+(?=\s*:))|(\b(?:function|return|const|let|var|if|else|for|while|do|new|class|extends|await|async|import|from|export|default|switch|case|break|typeof|document|window|console|true|false|null|undefined|this)\b)|([{}();,])/g;
+            let hasil = '', terakhir = 0, m;
+            while ((m = pola.exec(kode)) !== null) {
+                hasil += escHtml(kode.slice(terakhir, m.index));
+                const tok = m[0];
+                let kelas = null;
+                if (m[1] || m[2] || m[3]) kelas = 'tk-komen';
+                else if (m[4] || m[5] || m[6]) kelas = 'tk-str';
+                else if (m[7]) kelas = 'tk-tag';
+                else if (m[8]) kelas = 'tk-num';
+                else if (m[9]) kelas = 'tk-prop';
+                else if (m[10]) kelas = 'tk-kw';
+                else if (m[11]) kelas = 'tk-tanda';
+                hasil += kelas ? '<span class="' + kelas + '">' + escHtml(tok) + '</span>' : escHtml(tok);
+                terakhir = m.index + tok.length;
+                if (tok.length === 0) pola.lastIndex++;
+            }
+            hasil += escHtml(kode.slice(terakhir));
+            return hasil;
+        }
+
+        function renderMD(src) {
+            const bagian = String(src == null ? '' : src).split(/```/);
+            let html = '';
+            bagian.forEach((seg, i) => {
+                if (i % 2 === 1) {
+                    let lang = '', kode = seg;
+                    const nl = seg.indexOf('\n');
+                    if (nl >= 0) { const awal = seg.slice(0, nl).trim(); if (/^[a-zA-Z0-9#+.-]{1,20}$/.test(awal)) { lang = awal; kode = seg.slice(nl + 1); } }
+                    kode = kode.replace(/^\n+/, '').replace(/\n+$/, '');
+                    html += '<div class="kotak-kode"><div class="kk-head"><span>' + escHtml(lang || 'kode') + '</span><button type="button" class="kk-salin">Salin</button></div><pre><code>' + sorotKode(kode, lang) + '</code></pre></div>';
+                } else {
+                    html += mdTeks(seg);
+                }
+            });
+            return html;
+        }
+
+        async function salinTeks(teks, tombol) {
+            let ok = false;
+            try { await navigator.clipboard.writeText(teks); ok = true; } catch (e) {}
+            if (!ok) {
+                try {
+                    const ta = document.createElement('textarea');
+                    ta.value = teks; ta.style.position = 'fixed'; ta.style.opacity = '0';
+                    document.body.appendChild(ta); ta.select();
+                    ok = document.execCommand('copy');
+                    ta.remove();
+                } catch (e) {}
+            }
+            if (tombol) { const asal = tombol.innerText; tombol.innerText = ok ? 'Tersalin ✓' : 'Gagal'; setTimeout(() => { tombol.innerText = asal; }, 1400); }
+        }
+
+        function appendMessage(role, text, gambar, idx) {
             const div = document.createElement('div');
-            div.className = role === 'user' ? 'flex justify-end' : 'flex justify-start';
-            const bgColor = role === 'user' ? 'bg-red-950/40 border border-red-900/30' : 'glass border-l-4 border-red-600';
-            const name = role === 'user' ? 'TUAN IRVAN' : 'VANGPT';
             const imgHtml = gambar ? `<img src="${gambar}" class="pesan-gambar" alt="gambar terlampir">` : '';
-            div.innerHTML = `<div class="${bgColor} p-4 rounded-2xl max-w-[85%] shadow-2xl"><p class="text-[9px] font-black mb-1 tracking-widest ${role === 'user' ? 'text-gray-400' : 'text-red-600'}">${name}</p>${imgHtml}<p class="text-sm text-gray-200">${escTeks(text)}</p></div>`;
+            const punyaIdx = typeof idx === 'number' && idx >= 0;
+            let aksi = '';
+            if (punyaIdx) {
+                aksi = '<div class="aksi-pesan">' + (role === 'user' ? `<button type="button" data-aksi="edit" data-idx="${idx}">✎ Edit</button>` : '') + `<button type="button" data-aksi="salin" data-idx="${idx}">⧉ Salin</button></div>`;
+            }
+            if (role === 'user') {
+                div.className = 'baris-user';
+                div.innerHTML = `<div style="display:flex;flex-direction:column;align-items:flex-end;max-width:88%">${imgHtml}<div class="gelembung-user"></div>${aksi}</div>`;
+                div.querySelector('.gelembung-user').innerText = text;
+            } else {
+                div.className = 'baris-ai';
+                div.innerHTML = `<p class="label-ai">VanGPT</p>${imgHtml}<div class="isi-pesan">${renderMD(text)}</div>${aksi}`;
+            }
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
             return div;
@@ -329,7 +505,7 @@
         let pesanIncog = [];
         let draftGambar = null;
 
-        const SAPAAN_HTML = `<div class="glass p-4 rounded-2xl max-w-[90%] border-l-4 border-red-600 red-shadow"><p class="text-[10px] text-red-600 font-black mb-1">SYSTEM NOTIFICATION</p><p class="text-sm italic leading-relaxed text-gray-300">"Kunci telah terbuka, Tuan Irvan. Sistem Auto-Rotate aktif. Gunakan kekuatan ini sesukamu. 💀🔥"</p></div>`;
+        const SAPAAN_HTML = `<div><p class="label-ai">VanGPT</p><div class="isi-pesan"><p class="md-p">Halo, Tuan Irvan. Mau dibantu apa hari ini?</p></div></div>`;
 
         function idBaru() { return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
@@ -367,9 +543,9 @@
             const daftar = pesanAktif();
             document.body.classList.toggle('incognito', modeIncog);
             incogBanner.classList.toggle('hidden', !modeIncog);
-            roomJudul.innerText = modeIncog ? '🕵️ INCOGNITO — TIDAK DISIMPAN' : ('💬 ' + roomAktif().nama.toUpperCase());
+            roomJudul.innerText = modeIncog ? 'INCOGNITO — TIDAK DISIMPAN' : roomAktif().nama.toUpperCase();
             if (!daftar.length) { chatBox.innerHTML = SAPAAN_HTML; return; }
-            daftar.forEach(m => appendMessage(m.r === 'u' ? 'user' : 'ai', m.t, m.g || null));
+            daftar.forEach((m, i) => appendMessage(m.r === 'u' ? 'user' : 'ai', m.t, m.g || null, i));
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
@@ -496,24 +672,80 @@
 
 
         // ---- Kirim (room-aware, memori per room ikut terkirim) ----
-        sendBtn.addEventListener('click', async () => {
+        let sedangKirim = false;
+        async function prosesKirim(teksKirim, gambar) {
+            if (sedangKirim) return;
+            sedangKirim = true;
+            try {
+                const riwayat = pesanAktif().map(m => ({ role: m.r === 'u' ? 'user' : 'assistant', text: m.g ? (m.t + ' [dengan gambar terlampir]') : m.t }));
+                tambahPesan('user', teksKirim, gambar);
+                appendMessage('user', teksKirim, gambar, pesanAktif().length - 1);
+                const loadDiv = appendMessage('ai', '', null, -1);
+                loadDiv.querySelector('.isi-pesan').innerHTML = '<span class="titik"><i></i><i></i><i></i></span>';
+                const result = await callWf(teksKirim, riwayat, gambar);
+                tambahPesan('ai', result, null);
+                tampilkanPesan();
+                ucapkan(result);
+            } finally { sedangKirim = false; }
+        }
+
+        sendBtn.addEventListener('click', () => {
             const text = userInput.value.trim();
             if (!text && !draftGambar) return;
             const gambar = draftGambar;
             const teksKirim = text || '(lihat gambar ini)';
-            const riwayat = pesanAktif().map(m => ({ role: m.r === 'u' ? 'user' : 'assistant', text: m.g ? (m.t + ' [dengan gambar terlampir]') : m.t }));
-            tambahPesan('user', teksKirim, gambar);
-            appendMessage('user', teksKirim, gambar);
             userInput.value = '';
             draftGambar = null; gambarChip.classList.add('hidden');
-            const loadDiv = appendMessage('ai', 'Memproses perintah...');
-            let result;
-            result = await callWf(teksKirim, riwayat, gambar);
-            loadDiv.querySelector('.text-sm').innerText = result;
-            chatBox.scrollTop = chatBox.scrollHeight;
-            tambahPesan('ai', result, null);
-            ucapkan(result);
+            prosesKirim(teksKirim, gambar);
         });
+
+        // ---- Aksi per pesan: salin kode, salin pesan, edit & kirim ulang ----
+        chatBox.addEventListener('click', (e) => {
+            const btnKode = e.target.closest('.kk-salin');
+            if (btnKode) {
+                const kotak = btnKode.closest('.kotak-kode');
+                const kode = kotak ? kotak.querySelector('code') : null;
+                if (kode) salinTeks(kode.innerText, btnKode);
+                return;
+            }
+            const btn = e.target.closest('[data-aksi]');
+            if (!btn) return;
+            const idx = parseInt(btn.getAttribute('data-idx'), 10);
+            const daftar = pesanAktif();
+            if (isNaN(idx) || !daftar[idx]) return;
+            if (btn.getAttribute('data-aksi') === 'salin') { salinTeks(daftar[idx].t, btn); return; }
+            if (btn.getAttribute('data-aksi') === 'edit') mulaiEdit(idx, btn);
+        });
+
+        function mulaiEdit(idx, tombol) {
+            if (sedangKirim) return;
+            const daftar = pesanAktif();
+            const m = daftar[idx];
+            if (!m || m.r !== 'u') return;
+            const baris = tombol.closest('.baris-user');
+            if (!baris) return;
+            const gelembung = baris.querySelector('.gelembung-user');
+            const aksiRow = baris.querySelector('.aksi-pesan');
+            if (aksiRow) aksiRow.style.display = 'none';
+            const wadah = document.createElement('div');
+            wadah.innerHTML = '<textarea class="area-edit" rows="3"></textarea><div class="tombol-edit"><button type="button" class="te-kirim">Kirim Ulang</button><button type="button" class="te-batal">Batal</button></div>';
+            const ta = wadah.querySelector('textarea');
+            ta.value = m.t;
+            gelembung.replaceWith(wadah);
+            ta.focus();
+            try { ta.setSelectionRange(ta.value.length, ta.value.length); } catch (e) {}
+            wadah.querySelector('.te-batal').addEventListener('click', () => tampilkanPesan());
+            wadah.querySelector('.te-kirim').addEventListener('click', () => {
+                const baru = ta.value.trim();
+                if (!baru) return;
+                const d = pesanAktif();
+                const g = d[idx] ? d[idx].g : null;
+                d.length = idx; // buang pesan ini & semua sesudahnya — percakapan mulai ulang dari titik ini
+                if (!modeIncog) { simpanRooms(); renderRoomList(); }
+                tampilkanPesan();
+                prosesKirim(baru, g || null);
+            });
+        }
 
         // ---- Init V2 ----
         muatRooms();
